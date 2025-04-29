@@ -3,9 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace api.Dtos.Suppliers
+namespace backend.Dtos.User
 {
-    public class SuppliersDto
+    public class UserDto
     {
         public string Id { get; set; }
         public string Username { get; set; }

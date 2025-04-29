@@ -6,11 +6,11 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using backend.Models;
-using api.Dtos.Suppliers;
+using backend.Dtos.User;
 
 namespace backend.Controller.Suppliers
 {
-    [Route("api/get-all-suppliers")]
+    [Route("api/get-all-suppliers/")]
     [ApiController]
     public class GetAllSuppliers : ControllerBase
     {
@@ -24,20 +24,22 @@ namespace backend.Controller.Suppliers
         }
 
         [HttpGet]
-        public async Task<IActionResult> GetAll()
+        public async Task<IActionResult> GetAll([FromQuery] string id)
         {
             try
             {
-                // Get the supplier role
-                var supplierRole = await _roleManager.FindByNameAsync("Supplier");
+                // Get the supplier role by ID
+                var supplierRole = await _roleManager.FindByIdAsync(id);
                 if (supplierRole == null)
-                    return NotFound("Supplier role not found");
+                    return NotFound("Role not found");
 
                 // Get all users in the supplier role
-                var supplierUsers = await _userManager.GetUsersInRoleAsync("Supplier");
+                var supplierUsers = await _userManager.GetUsersInRoleAsync(supplierRole.Name);
+                if (supplierUsers == null)
+                    return NotFound("No Users Found!");
 
                 // Map to DTO
-                var suppliers = supplierUsers.Select(user => new SuppliersDto
+                var suppliers = supplierUsers.Select(user => new UserDto
                 {
                     Id = user.Id,
                     Username = user.UserName,
