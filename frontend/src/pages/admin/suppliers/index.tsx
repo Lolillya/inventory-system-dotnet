@@ -1,11 +1,5 @@
-import { data } from "react-router-dom";
 import { InfoCard } from "../../../components/info-card";
-import {
-  FilterIcon,
-  MousePointerClickIcon,
-  PlusIcon,
-  SearchIcon,
-} from "../../../icons";
+import { FilterIcon, PlusIcon, SearchIcon } from "../../../icons";
 import { useSuppliersQuery } from "../../../queryOptions/suppliers/supplier-get-all.query";
 import { useSupplierSelectedQuery } from "../../../queryOptions/suppliers/supplier-selected.query";
 import { NoSelectedState } from "./_components/no-selected-state";

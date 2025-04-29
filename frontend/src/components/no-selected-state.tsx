@@ -1,4 +1,4 @@
-import { MousePointerClickIcon } from "../../../../icons";
+import { MousePointerClickIcon } from "../icons";
 
 export const NoSelectedState = () => {
   return (
