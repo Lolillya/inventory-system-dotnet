@@ -8,7 +8,6 @@ import { useSelectedCustomerQuery } from "../../../queryOptions/customers/custom
 
 const SuppliersPage = () => {
   const { data: customers, isLoading, error } = useCustomersQuery();
-  // const { data: selectedSupplier } = useSupplierSelectedQuery();
   const { data: selectedCustomer } = useSelectedCustomerQuery();
 
   // FETCH DATA LOADING STATE

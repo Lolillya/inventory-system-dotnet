@@ -9,7 +9,7 @@ import {
 } from "../icons";
 import { UserClientModel } from "../models/user-client.model";
 
-type UserType = 'customer' | 'supplier';
+type UserType = "customer" | "supplier" | "employee";
 
 interface SelectedUserProps extends UserClientModel {
   type: UserType;

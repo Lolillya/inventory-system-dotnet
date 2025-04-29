@@ -2,8 +2,9 @@ import { StarIcon, TrashIcon } from "../icons";
 import { UserClientModel } from "../models/user-client.model";
 import { useSetSupplierSelected } from "../queryOptions/suppliers/supplier-selected.query";
 import { useSetCustomerSelected } from "../queryOptions/customers/customer-selecter.query";
+import { useSetEmployeeSelected } from "../queryOptions/employees/empployee-selected.query";
 
-type UserType = 'customer' | 'supplier';
+type UserType = "customer" | "supplier" | "employee";
 
 interface InfoCardProps extends UserClientModel {
   type: UserType;
@@ -12,13 +13,12 @@ interface InfoCardProps extends UserClientModel {
 export const InfoCard = ({ type, ...data }: InfoCardProps) => {
   const setSupplierSelected = useSetSupplierSelected();
   const setCustomerSelected = useSetCustomerSelected();
+  const setEmployeeSelected = useSetEmployeeSelected();
 
   const handleClick = (user: UserClientModel) => {
-    if (type === 'supplier') {
-      setSupplierSelected(user);
-    } else {
-      setCustomerSelected(user);
-    }
+    if (type === "supplier") setSupplierSelected(user);
+    if (type === "employee") setEmployeeSelected(user);
+    else setCustomerSelected(user);
   };
 
   return (
