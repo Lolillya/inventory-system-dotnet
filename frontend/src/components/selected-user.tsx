@@ -7,9 +7,15 @@ import {
   RightUpArrowIcon,
   UserIcon,
 } from "../icons";
-import { SupplierModel } from "../models/user-client.model";
+import { UserClientModel } from "../models/user-client.model";
 
-export const SelectedUser = (supplier: SupplierModel) => {
+type UserType = 'customer' | 'supplier';
+
+interface SelectedUserProps extends UserClientModel {
+  type: UserType;
+}
+
+export const SelectedUser = ({ type, ...user }: SelectedUserProps) => {
   return (
     <div className="flex flex-col p-5 w-full gap-2">
       <div className="flex items-center justify-between">
@@ -19,13 +25,13 @@ export const SelectedUser = (supplier: SupplierModel) => {
           </div>
           <div className="flex flex-col gap-2">
             <div className="flex items-center gap-2">
-              <p className="text-base text-slate-700">{supplier.companyName}</p>
+              <p className="text-base text-slate-700">{user.companyName}</p>
 
               <span className="rounded-full bg-cyan-200 px-2 py-[3px] text-sm tracking-wide text-cyan-700">
-                Supplier
+                {type}
               </span>
             </div>
-            <p className="text-sm text-slate-400">{supplier.id}</p>
+            <p className="text-sm text-slate-400">{user.id}</p>
           </div>
         </div>
         <div className="cursor-pointer hover:bg-bellflower-gray p-3 rounded-lg transition-colors duration-300 text-vesper-gray">
@@ -35,7 +41,7 @@ export const SelectedUser = (supplier: SupplierModel) => {
 
       <Separator />
 
-      {/* SUPPLIER FULLNAME SECTION */}
+      {/* user FULLNAME SECTION */}
       <div className="p-2 rounded-lg bg-wash-gray">
         <div className="p-2 flex items-center gap-3">
           <div className="bg-bellflower-gray h-12 w-12 rounded-lg flex items-center justify-center text-blouse-gray">
@@ -44,7 +50,7 @@ export const SelectedUser = (supplier: SupplierModel) => {
           <div className="flex flex-col justify-center">
             <div className="flex items-center gap-2">
               <p className="text-base info-name">
-                {supplier.firstName} {supplier.lastName}
+                {user.firstName} {user.lastName}
               </p>
             </div>
             <p className="info-id">Representative</p>
@@ -52,7 +58,7 @@ export const SelectedUser = (supplier: SupplierModel) => {
         </div>
       </div>
 
-      {/* SUPPLIER CONTACT NUMBER SECTION */}
+      {/* user CONTACT NUMBER SECTION */}
       <div className="p-2 rounded-lg bg-wash-gray">
         <div className="p-2 flex items-center gap-3">
           <div className="bg-bellflower-gray h-12 w-12 rounded-lg flex items-center justify-center text-blouse-gray">
@@ -60,14 +66,14 @@ export const SelectedUser = (supplier: SupplierModel) => {
           </div>
           <div className="flex flex-col justify-center">
             <div className="flex items-center gap-2">
-              <p className="text-base info-name">{supplier.phoneNumber}</p>
+              <p className="text-base info-name">{user.phoneNumber}</p>
             </div>
             <p className="text-sm info-id">Contact</p>
           </div>
         </div>
       </div>
 
-      {/* SUPPLIER EMAIL SECTION */}
+      {/* user EMAIL SECTION */}
       <div className="p-2 rounded-lg bg-wash-gray">
         <div className="p-2 flex items-center gap-3">
           <div className="bg-bellflower-gray h-12 w-12 rounded-lg flex items-center justify-center text-blouse-gray">
@@ -75,14 +81,14 @@ export const SelectedUser = (supplier: SupplierModel) => {
           </div>
           <div className="flex flex-col justify-center">
             <div className="flex items-center gap-2">
-              <p className="text-base info-name">{supplier.email}</p>
+              <p className="text-base info-name">{user.email}</p>
             </div>
             <p className="text-sm info-id">Email</p>
           </div>
         </div>
       </div>
 
-      {/* SUPPLIER ADDRESS SECTOIN */}
+      {/* user ADDRESS SECTOIN */}
       <div className="p-2 rounded-lg bg-wash-gray">
         <div className="p-2 flex gap-3">
           <div className="bg-bellflower-gray h-12 w-12 rounded-lg flex items-center justify-center text-blouse-gray">
@@ -101,14 +107,14 @@ export const SelectedUser = (supplier: SupplierModel) => {
         </div>
       </div>
 
-      {/* SUPPLIER NOTES SECTION */}
+      {/* user NOTES SECTION */}
       <div className="p-2 rounded-lg bg-wash-gray">
         <div className="p-2 flex gap-3 flex-col">
           <p className="text-sm text-slate-400">Notes</p>
           <div className="flex w-full gap-2">
             <textarea
               rows={3}
-              value={supplier.notes}
+              value={user.notes}
               className="w-full resize-none text-sm"
             />
           </div>

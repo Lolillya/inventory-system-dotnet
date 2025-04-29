@@ -7,9 +7,9 @@ import {
   RightUpArrowIcon,
   UserIcon,
 } from "../../../../icons";
-import { SupplierModel } from "../../../../models/user-client.model";
+import { UserClientModel } from "../../../../models/user-client.model";
 
-export const SelectedSupplier = (supplier: SupplierModel) => {
+export const SelectedSupplier = (supplier: UserClientModel) => {
   return (
     <div className="flex flex-col p-5 w-full gap-2">
       <div className="flex items-center justify-between">

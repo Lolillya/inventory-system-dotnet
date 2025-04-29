@@ -4,10 +4,12 @@ import { SelectedUser } from "../../../components/selected-user";
 import { NoSelectedState } from "../../../components/no-selected-state";
 import { Separator } from "../../../components/separator";
 import { useCustomersQuery } from "../../../queryOptions/customers/customer-get-all.query";
+import { useSelectedCustomerQuery } from "../../../queryOptions/customers/customer-selecter.query";
 
 const SuppliersPage = () => {
-  const { data: suppliers, isLoading, error } = useCustomersQuery();
+  const { data: customers, isLoading, error } = useCustomersQuery();
   // const { data: selectedSupplier } = useSupplierSelectedQuery();
+  const { data: selectedCustomer } = useSelectedCustomerQuery();
 
   // FETCH DATA LOADING STATE
   if (isLoading) return <div>Loading...</div>;
@@ -47,9 +49,9 @@ const SuppliersPage = () => {
           </div>
 
           <div className="w-full overflow-y-scroll">
-            {suppliers?.map((data, index) => (
+            {customers?.map((data, index) => (
               <>
-                <InfoCard key={index} {...data} />
+                <InfoCard type="customer" key={index} {...data} />
                 <Separator />
               </>
             ))}
@@ -64,13 +66,13 @@ const SuppliersPage = () => {
             </label>
           </div>
 
-          {/* <div className="h-full bg-custom-gray rounded-lg flex">
-            {!selectedSupplier ? (
+          <div className="h-full bg-custom-gray rounded-lg flex">
+            {!selectedCustomer ? (
               <NoSelectedState />
             ) : (
-              <SelectedUser {...selectedSupplier} />
+              <SelectedUser type="customer" {...selectedCustomer} />
             )}
-          </div> */}
+          </div>
         </div>
       </div>
     </section>

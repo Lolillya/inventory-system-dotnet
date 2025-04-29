@@ -2,9 +2,10 @@ import { InfoCard } from "../../../components/info-card";
 import { FilterIcon, PlusIcon, SearchIcon } from "../../../icons";
 import { useSuppliersQuery } from "../../../queryOptions/suppliers/supplier-get-all.query";
 import { useSupplierSelectedQuery } from "../../../queryOptions/suppliers/supplier-selected.query";
-import { NoSelectedState } from "./_components/no-selected-state";
-import { SelectedSupplier } from "./_components/selected-supplier";
 import { Separator } from "../../../components/separator";
+import { NoSelectedState } from "../../../components/no-selected-state";
+import { SelectedUser } from "../../../components/selected-user";
+
 
 const SuppliersPage = () => {
   const { data: suppliers, isLoading, error } = useSuppliersQuery();
@@ -50,7 +51,7 @@ const SuppliersPage = () => {
           <div className="w-full overflow-y-scroll">
             {suppliers?.map((data, index) => (
               <>
-                <InfoCard key={index} {...data} />
+                <InfoCard type="supplier" key={index} {...data} />
                 <Separator />
               </>
             ))}
@@ -69,7 +70,7 @@ const SuppliersPage = () => {
             {!selectedSupplier ? (
               <NoSelectedState />
             ) : (
-              <SelectedSupplier {...selectedSupplier} />
+              <SelectedUser type="supplier" {...selectedSupplier} />
             )}
           </div>
         </div>

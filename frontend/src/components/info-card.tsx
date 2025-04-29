@@ -1,13 +1,24 @@
 import { StarIcon, TrashIcon } from "../icons";
-import { SupplierModel } from "../models/user-client.model";
+import { UserClientModel } from "../models/user-client.model";
 import { useSetSupplierSelected } from "../queryOptions/suppliers/supplier-selected.query";
+import { useSetCustomerSelected } from "../queryOptions/customers/customer-selecter.query";
 
-export const InfoCard = (data: SupplierModel) => {
+type UserType = 'customer' | 'supplier';
+
+interface InfoCardProps extends UserClientModel {
+  type: UserType;
+}
+
+export const InfoCard = ({ type, ...data }: InfoCardProps) => {
   const setSupplierSelected = useSetSupplierSelected();
+  const setCustomerSelected = useSetCustomerSelected();
 
-  const handleClick = (supplier: SupplierModel) => {
-    console.log("Clicked supplier:", supplier);
-    setSupplierSelected(supplier);
+  const handleClick = (user: UserClientModel) => {
+    if (type === 'supplier') {
+      setSupplierSelected(user);
+    } else {
+      setCustomerSelected(user);
+    }
   };
 
   return (
