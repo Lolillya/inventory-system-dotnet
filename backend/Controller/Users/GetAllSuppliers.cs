@@ -10,7 +10,7 @@ using backend.Dtos.User;
 
 namespace backend.Controller.Suppliers
 {
-    [Route("api/get-all-suppliers/")]
+    [Route("api/users/")]
     [ApiController]
     public class GetAllSuppliers : ControllerBase
     {

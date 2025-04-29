@@ -1,16 +1,13 @@
 import { InfoCard } from "../../../components/info-card";
 import { FilterIcon, PlusIcon, SearchIcon } from "../../../icons";
-import { useSuppliersQuery } from "../../../queryOptions/suppliers/supplier-get-all.query";
-import { useSupplierSelectedQuery } from "../../../queryOptions/suppliers/supplier-selected.query";
-// import { NoSelectedState } from "./_components/no-selected-state";
-// import { SelectedSupplier } from "./_components/selected-supplier";
 import { SelectedUser } from "../../../components/selected-user";
 import { NoSelectedState } from "../../../components/no-selected-state";
 import { Separator } from "../../../components/separator";
+import { useCustomersQuery } from "../../../queryOptions/customers/customer-get-all.query";
 
 const SuppliersPage = () => {
-  const { data: suppliers, isLoading, error } = useSuppliersQuery();
-  const { data: selectedSupplier } = useSupplierSelectedQuery();
+  const { data: suppliers, isLoading, error } = useCustomersQuery();
+  // const { data: selectedSupplier } = useSupplierSelectedQuery();
 
   // FETCH DATA LOADING STATE
   if (isLoading) return <div>Loading...</div>;
@@ -67,13 +64,13 @@ const SuppliersPage = () => {
             </label>
           </div>
 
-          <div className="h-full bg-custom-gray rounded-lg flex">
+          {/* <div className="h-full bg-custom-gray rounded-lg flex">
             {!selectedSupplier ? (
               <NoSelectedState />
             ) : (
               <SelectedUser {...selectedSupplier} />
             )}
-          </div>
+          </div> */}
         </div>
       </div>
     </section>
