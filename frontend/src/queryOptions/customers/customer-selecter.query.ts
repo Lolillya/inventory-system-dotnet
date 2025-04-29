@@ -1,11 +1,11 @@
 import { useQuery, useQueryClient } from "@tanstack/react-query";
 import { UserClientModel } from "../../models/user-client.model";
 
-const supplierSelectedKey = ["supplier-selected"];
+const customerSelectedKey = ["customer-selected"];
 
-export const useSupplierSelectedQuery = () => {
+export const useSelectedCustomerQuery = () => {
   return useQuery<UserClientModel>({
-    queryKey: supplierSelectedKey,
+    queryKey: customerSelectedKey,
     queryFn: async () => {
       return null as unknown as UserClientModel;
     },
@@ -13,10 +13,10 @@ export const useSupplierSelectedQuery = () => {
   });
 };
 
-export const useSetSupplierSelected = () => {
+export const useSetCustomerSelected = () => {
   const queryClient = useQueryClient();
 
-  return (supplier: UserClientModel) => {
-    queryClient.setQueryData<UserClientModel>(supplierSelectedKey, supplier);
+  return (customer: UserClientModel) => {
+    queryClient.setQueryData<UserClientModel>(customerSelectedKey, customer);
   };
 };

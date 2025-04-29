@@ -1,5 +1,5 @@
 import { StarIcon, TrashIcon } from "../icons";
-import { SupplierModel } from "../models/supplier.model";
+import { SupplierModel } from "../models/user-client.model";
 import { useSetSupplierSelected } from "../queryOptions/suppliers/supplier-selected.query";
 
 export const InfoCard = (data: SupplierModel) => {

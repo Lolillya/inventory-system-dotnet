@@ -1,9 +1,9 @@
 import { useQuery } from "@tanstack/react-query";
-import { SupplierModel } from "../../models/supplier.model";
+import { UserClientModel } from "../../models/user-client.model";
 import { GetAllCustomers } from "../../services/customers/get-all-customers.service";
 
 export const useCustomersQuery = () => {
-  return useQuery<SupplierModel[]>({
+  return useQuery<UserClientModel[]>({
     queryKey: ["customer"],
     queryFn: async () => {
       const response = await GetAllCustomers();

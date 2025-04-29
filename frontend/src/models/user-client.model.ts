@@ -1,4 +1,4 @@
-export type SupplierModel = {
+export type UserClientModel = {
   id: string;
   userName: string;
   email: string;

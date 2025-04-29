@@ -7,7 +7,7 @@ import {
   RightUpArrowIcon,
   UserIcon,
 } from "../icons";
-import { SupplierModel } from "../models/supplier.model";
+import { SupplierModel } from "../models/user-client.model";
 
 export const SelectedUser = (supplier: SupplierModel) => {
   return (
