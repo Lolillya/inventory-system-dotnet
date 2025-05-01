@@ -6,10 +6,11 @@ import { Separator } from "../../../components/separator";
 import { NoSelectedState } from "../../../components/no-selected-state";
 import { SelectedUser } from "../../../components/selected-user";
 
-
 const SuppliersPage = () => {
   const { data: suppliers, isLoading, error } = useSuppliersQuery();
   const { data: selectedSupplier } = useSupplierSelectedQuery();
+
+  console.log(suppliers);
 
   // FETCH DATA LOADING STATE
   if (isLoading) return <div>Loading...</div>;

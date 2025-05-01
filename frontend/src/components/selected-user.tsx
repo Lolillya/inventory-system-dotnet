@@ -8,6 +8,7 @@ import {
   UserIcon,
 } from "../icons";
 import { UserClientModel } from "../models/user-client.model";
+import { useState } from "react";
 
 type UserType = "customer" | "supplier" | "employee";
 
@@ -27,7 +28,7 @@ export const SelectedUser = ({ type, ...user }: SelectedUserProps) => {
             <div className="flex items-center gap-2">
               <p className="text-base text-slate-700">{user.companyName}</p>
 
-              <span className="rounded-full bg-cyan-200 px-2 py-[3px] text-sm tracking-wide text-cyan-700">
+              <span className="rounded-full bg-cyan-200 px-2 py-[3px] text-sm tracking-wide text-cyan-700 capitalize">
                 {type}
               </span>
             </div>
@@ -121,19 +122,93 @@ export const SelectedUser = ({ type, ...user }: SelectedUserProps) => {
         </div>
       </div>
 
-      {/* RESTOCKS SECTION */}
-      <div className="p-2 rounded-lg bg-wash-gray flex shrink-0 flex-1 flex-col">
-        <div className="p-2 flex gap-3 flex-col">
-          <button className="bg-transparent text-vesper-gray font-semibold tracking-wide w-fit hover:bg-bellflower-gray">
+      {/* USER ACTIONS SECTION */}
+      {type === "supplier" && <SupplierActions />}
+      {type === "customer" && <CustomerActions />}
+      {type === "employee" && <EmployeeActions />}
+    </div>
+  );
+};
+
+const SupplierActions = () => {
+  return (
+    <div className="p-2 rounded-lg bg-wash-gray flex shrink-0 flex-1 flex-col">
+      <div className="p-2 flex gap-3 flex-col">
+        <button className="bg-transparent text-vesper-gray font-semibold tracking-wide w-fit hover:bg-bellflower-gray">
+          Restocks
+          <RightUpArrowIcon width={16} height={16} />
+        </button>
+        <div className="flex w-full gap-2"></div>
+      </div>
+
+      <div className="w-full h-full flex items-center justify-center">
+        <span className="font-semibold info-name">No restock found</span>
+      </div>
+    </div>
+  );
+};
+
+const CustomerActions = () => {
+  return (
+    <div className="p-2 rounded-lg bg-wash-gray flex shrink-0 flex-1 flex-col">
+      <div className="p-2 flex gap-3 flex-col">
+        <button className="bg-transparent text-vesper-gray font-semibold tracking-wide w-fit hover:bg-bellflower-gray">
+          Invoices
+          <RightUpArrowIcon width={16} height={16} />
+        </button>
+        <div className="flex w-full gap-2"></div>
+      </div>
+
+      <div className="w-full h-full flex items-center justify-center">
+        <span className="font-semibold info-name">No invoice found</span>
+      </div>
+    </div>
+  );
+};
+
+const EmployeeActions = () => {
+  const [restockActive, setRestockActive] = useState(true);
+  const [invoiceActive, setInvoiceActive] = useState(false);
+
+  const restockHandler = () => {
+    setRestockActive(true);
+    setInvoiceActive(false);
+  };
+
+  const invoiceHandler = () => {
+    setInvoiceActive(true);
+    setRestockActive(false);
+  };
+
+  return (
+    <div className="p-2 rounded-lg bg-wash-gray flex shrink-0 flex-1 flex-col">
+      <div className="p-2 flex gap-3 flex-col">
+        <div className="flex w-full gap-2">
+          <button
+            className="bg-transparent text-vesper-gray font-semibold tracking-wide w-fit hover:bg-bellflower-gray"
+            onClick={restockHandler}
+          >
             Restocks
             <RightUpArrowIcon width={16} height={16} />
           </button>
-          <div className="flex w-full gap-2"></div>
-        </div>
 
-        <div className="w-full h-full flex items-center justify-center">
-          <span className="font-semibold info-name">No restock found</span>
+          <button
+            className="bg-transparent text-vesper-gray font-semibold tracking-wide w-fit hover:bg-bellflower-gray"
+            onClick={invoiceHandler}
+          >
+            Invoices
+            <RightUpArrowIcon width={16} height={16} />
+          </button>
         </div>
+      </div>
+
+      <div className="w-full h-full flex items-center justify-center">
+        {restockActive && (
+          <span className="font-semibold info-name">No restock found</span>
+        )}
+        {invoiceActive && (
+          <span className="font-semibold info-name">No invoice found</span>
+        )}
       </div>
     </div>
   );
