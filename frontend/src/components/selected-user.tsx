@@ -185,7 +185,7 @@ const EmployeeActions = () => {
       <div className="p-2 flex gap-3 flex-col">
         <div className="flex w-full gap-2">
           <button
-            className="bg-transparent text-vesper-gray font-semibold tracking-wide w-fit hover:bg-bellflower-gray"
+            className={`text-vesper-gray font-semibold tracking-wide w-fit hover:bg-bellflower-gray ${restockActive ? "bg-bellflower-gray" : "bg-transparent"}`}
             onClick={restockHandler}
           >
             Restocks
@@ -193,7 +193,7 @@ const EmployeeActions = () => {
           </button>
 
           <button
-            className="bg-transparent text-vesper-gray font-semibold tracking-wide w-fit hover:bg-bellflower-gray"
+            className={`text-vesper-gray font-semibold tracking-wide w-fit hover:bg-bellflower-gray ${invoiceActive ? "bg-bellflower-gray" : "bg-transparent"}`}
             onClick={invoiceHandler}
           >
             Invoices
