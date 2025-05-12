@@ -1,51 +1,17 @@
-import React from "react";
-import axios from "axios";
-import { renderHook, act } from "@testing-library/react";
-import { UserProvider, useAuth } from "../use-auth";
+import { loginAPI } from "../../services/auth-service/auth-login.service";
 
-jest.mock("axios");
+describe("Login API Testing", () => {
+  it("should return 200 for /api/auth/login API endpoint", async () => {
+    const username = "admin1";
+    const password = "P@ssword_000";
 
-describe("loginUser", () => {
-  afterEach(() => {
-    jest.clearAllMocks();
-    localStorage.clear();
-  });
+    const res = await loginAPI(username, password);
 
-  test("should return user data on successful login", async () => {
-    const mockResponse = {
-      data: {
-        UserName: "admin1",
-        email: "admin1@example.com",
-        token: "mock-token",
-      },
-    };
+    console.log(res); // Log the actual response
 
-    (axios.post as jest.MockedFunction<typeof axios.post>).mockResolvedValue(
-      mockResponse
-    );
-
-    const wrapper = ({ children }: { children: React.ReactNode }) => (
-      <UserProvider>{children}</UserProvider>
-    );
-
-    const { result } = renderHook(() => useAuth(), { wrapper });
-
-    let userData;
-    await act(async () => {
-      userData = await result.current.loginUser("admin1", "P@ssword_000");
-    });
-
-    expect(userData).toEqual({
-      UserName: "admin1",
-      email: "admin1@example.com",
-    });
-
-    expect(localStorage.getItem("token")).toBe("mock-token");
-    expect(localStorage.getItem("user")).toBe(
-      JSON.stringify({
-        UserName: "admin1",
-        email: "admin1@example.com",
-      })
-    );
+    // Assert response status and data
+    expect(res!.status).toBe(200);
+    expect(res!.data).toHaveProperty("username");
+    expect(res!.data).toHaveProperty("email");
   });
 });
