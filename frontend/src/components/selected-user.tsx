@@ -29,7 +29,7 @@ export const SelectedUser = ({ type, ...user }: SelectedUserProps) => {
               <p className="text-base text-slate-700">{user.companyName}</p>
 
               <span className="rounded-full bg-cyan-200 px-2 py-[3px] text-sm tracking-wide text-cyan-700 capitalize">
-                {type}
+                {user.role}
               </span>
             </div>
             <p className="text-sm text-slate-400">{user.id}</p>

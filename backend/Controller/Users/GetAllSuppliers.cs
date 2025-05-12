@@ -48,7 +48,8 @@ namespace backend.Controller.Suppliers
                     LastName = user.LastName,
                     CompanyName = user.CompanyName,
                     Notes = user.Notes,
-                    PhoneNumber = user.PhoneNumber
+                    PhoneNumber = user.PhoneNumber,
+                    Role = supplierRole.Name,
                 }).ToList();
 
                 return Ok(suppliers);
