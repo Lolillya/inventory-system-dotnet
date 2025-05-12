@@ -1,14 +1,14 @@
 import { InfoCard } from "../../../components/info-card";
 import { FilterIcon, PlusIcon, SearchIcon } from "../../../icons";
 import { useSuppliersQuery } from "../../../queryOptions/suppliers/supplier-get-all.query";
-import { useSupplierSelectedQuery } from "../../../queryOptions/suppliers/supplier-selected.query";
+import { useSelectedSupplierQuery } from "../../../queryOptions/suppliers/supplier-selected.query";
 import { Separator } from "../../../components/separator";
 import { NoSelectedState } from "../../../components/no-selected-state";
 import { SelectedUser } from "../../../components/selected-user";
 
 const SuppliersPage = () => {
   const { data: suppliers, isLoading, error } = useSuppliersQuery();
-  const { data: selectedSupplier } = useSupplierSelectedQuery();
+  const { data: selectedSupplier } = useSelectedSupplierQuery();
 
   console.log(suppliers);
 

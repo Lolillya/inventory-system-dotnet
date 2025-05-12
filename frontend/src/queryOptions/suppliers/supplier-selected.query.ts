@@ -3,7 +3,7 @@ import { UserClientModel } from "../../models/user-client.model";
 
 const supplierSelectedKey = ["supplier-selected"];
 
-export const useSupplierSelectedQuery = () => {
+export const useSelectedSupplierQuery = () => {
   return useQuery<UserClientModel>({
     queryKey: supplierSelectedKey,
     queryFn: async () => {

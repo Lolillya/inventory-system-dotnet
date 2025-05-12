@@ -4,11 +4,11 @@ import { SelectedUser } from "../../../components/selected-user";
 import { Separator } from "../../../components/separator";
 import { FilterIcon, PlusIcon, SearchIcon } from "../../../icons";
 import { userEmployeesQuery } from "../../../queryOptions/employees/employee-get-all.query";
-import { useEmployeeSelectedQuery } from "../../../queryOptions/employees/empployee-selected.query";
+import { useSelectedEmployeeQuery } from "../../../queryOptions/employees/empployee-selected.query";
 
 const EmployeesPage = () => {
   const { data: employees, isLoading, error } = userEmployeesQuery();
-  const { data: selectedEmployee } = useEmployeeSelectedQuery();
+  const { data: selectedEmployee } = useSelectedEmployeeQuery();
 
   // FETCH DATA LOADING STATE
   if (isLoading) return <div>Loading...</div>;

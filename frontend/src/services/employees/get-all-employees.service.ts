@@ -3,7 +3,7 @@ import { UserClientModel } from "../../models/user-client.model";
 import { api } from "../API.service";
 import { handleError } from "../../helpers/error-handler.helper";
 
-export const GetALlEmployees = async () => {
+export const GetAllEmployees = async () => {
   try {
     const data = await axios.get<UserClientModel[]>(api + "users/?id=2");
     return data;
