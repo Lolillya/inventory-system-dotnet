@@ -1,3 +1,4 @@
+import React from "react";
 import { InfoCard } from "../../../components/info-card";
 import { NoSelectedState } from "../../../components/no-selected-state";
 import { SelectedUser } from "../../../components/selected-user";
@@ -49,10 +50,10 @@ const EmployeesPage = () => {
 
           <div className="w-full overflow-y-scroll">
             {employees?.map((data, index) => (
-              <>
+              <React.Fragment key={data.id}>
                 <InfoCard type="employee" key={index} {...data} />
                 <Separator />
-              </>
+              </React.Fragment>
             ))}
           </div>
         </div>

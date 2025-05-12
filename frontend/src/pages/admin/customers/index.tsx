@@ -5,6 +5,7 @@ import { NoSelectedState } from "../../../components/no-selected-state";
 import { Separator } from "../../../components/separator";
 import { useCustomersQuery } from "../../../queryOptions/customers/customer-get-all.query";
 import { useSelectedCustomerQuery } from "../../../queryOptions/customers/customer-selecter.query";
+import React from "react";
 
 const SuppliersPage = () => {
   const { data: customers, isLoading, error } = useCustomersQuery();
@@ -49,10 +50,10 @@ const SuppliersPage = () => {
 
           <div className="w-full overflow-y-scroll">
             {customers?.map((data, index) => (
-              <>
+              <React.Fragment key={data.id}>
                 <InfoCard type="customer" key={index} {...data} />
                 <Separator />
-              </>
+              </React.Fragment>
             ))}
           </div>
         </div>
