@@ -5,6 +5,7 @@ import { useSelectedSupplierQuery } from "../../../queryOptions/suppliers/suppli
 import { Separator } from "../../../components/separator";
 import { NoSelectedState } from "../../../components/no-selected-state";
 import { SelectedUser } from "../../../components/selected-user";
+import React from "react";
 
 const SuppliersPage = () => {
   const { data: suppliers, isLoading, error } = useSuppliersQuery();
@@ -52,7 +53,7 @@ const SuppliersPage = () => {
           <div className="w-full overflow-y-scroll">
             {suppliers?.map((data, index) => (
               <React.Fragment key={data.id}>
-                <InfoCard type="supplier" {...data} />
+                <InfoCard type="supplier" key={index} {...data} />
                 <Separator />
               </React.Fragment>
             ))}

@@ -7,4 +7,5 @@ export type UserClientModel = {
   companyName: string;
   notes: string;
   phoneNumber: string;
+  role: string;
 };

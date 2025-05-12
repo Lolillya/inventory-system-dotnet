@@ -18,7 +18,7 @@ export const InfoCard = ({ type, ...data }: InfoCardProps) => {
   const handleClick = (user: UserClientModel) => {
     if (type === "supplier") setSupplierSelected(user);
     if (type === "employee") setEmployeeSelected(user);
-    else setCustomerSelected(user);
+    if (type === "customer") setCustomerSelected(user);
   };
 
   return (
