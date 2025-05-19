@@ -8,10 +8,12 @@ namespace backend.Models.Inventory
 {
     public class Inventory
     {
-        public BigInteger TotalQuantity { get; set; }
-        public BigInteger InventoryNumber { get; set; }
-        public DateTime CreatedAt { get; set; }
-        public DateTime UpdatedAt { get; set; }
-        public string InventoryClerk { get; set; }
+        public int Inventory_Id { get; set; }
+        public int Variant_Id { get; set; }
+        public BigInteger Total_Quantity { get; set; }
+        public BigInteger Inventory_Number { get; set; }
+        public DateTime Created_At { get; set; }
+        public DateTime Updated_At { get; set; }
+        public string Inventory_Clerk { get; set; }
     }
 }
