@@ -7,7 +7,8 @@ namespace backend.Models.Inventory
 {
     public class Category
     {
-        public string CategoryName { get; set; }
+        public int Category_Id { get; set; }
+        public string Category_Name { get; set; }
         public DateTime CreatedAt { get; set; }
         public DateTime UpdatedAt { get; set; }
     }
