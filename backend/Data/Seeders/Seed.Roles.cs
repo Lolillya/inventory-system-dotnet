@@ -6,7 +6,8 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 
 namespace backend.Data.Seeders;
-public class Roles
+
+public static class Roles
 {
     public static void SeedRoles(ModelBuilder builder)
     {

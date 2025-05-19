@@ -7,8 +7,9 @@ namespace backend.Models.Inventory
 {
     public class Variant
     {
-        public int ProductId { get; set; }
-        public string VariantName { get; set; }
+        public int Variant_Id { get; set; }
+        public int Product_Id { get; set; }
+        public string Variant_Name { get; set; }
         public DateTime CreatedAt { get; set; }
         public DateTime UpdatedAt { get; set; }
     }

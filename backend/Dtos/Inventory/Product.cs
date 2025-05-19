@@ -15,9 +15,9 @@ namespace backend.Dtos.Inventory
         [Required]
         public string Description { get; set; }
         [Required]
-        public int BrandId { get; set; }
+        public int Brand_Id { get; set; }
         [Required]
-        public int CategoryId { get; set; }
+        public int Category_Id { get; set; }
         [Required]
         public DateTime CreatedAt { get; set; }
         [Required]
