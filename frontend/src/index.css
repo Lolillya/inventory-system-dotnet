@@ -140,6 +140,11 @@
   /* PINK */
   --color-cake-pink: #fbdfe4;
   --color-munch-pink: #f43f5e;
+
+  /* DASHBOARD COLORS */
+  --color-blue-bg: #bfe8ff;
+  --color-blue-fill: #4379ee;
+  --color-green-fill: #00b69b;
 }
 
 @layer base {

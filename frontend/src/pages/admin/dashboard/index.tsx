@@ -1,6 +1,8 @@
 import { useAuth } from "../../../context/use-auth";
 import { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
+import { DownArrowIcon, RightUpArrowIcon, UpArrowIcon } from "../../../icons";
+import { StockedIn } from "./_components/stocked-in";
 // import { useSuppliersQuery } from "../../../services/suppliers/supplier-queries";
 
 const DashboardPage = () => {
@@ -21,9 +23,15 @@ const DashboardPage = () => {
   }
 
   return (
-    <div className="w-full flex justify-center items-center">
-      <div>dashboard</div>
-    </div>
+    <section>
+      <div>
+        <div className="w-full flex justify-center items-center">
+          {/* DASHBOARD HEADER CARD */}
+          <StockedIn />
+          <div>dashboard</div>
+        </div>
+      </div>
+    </section>
   );
 };
 

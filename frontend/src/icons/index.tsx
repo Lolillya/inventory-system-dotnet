@@ -258,10 +258,7 @@ export const StarIcon = ({ width = 24, height = 24 }: IconProps) => {
     </svg>
   );
 };
-export const MousePointerClickIcon = ({
-  width = 24,
-  height = 24,
-}: IconProps) => {
+export const MousePointerClickIcon = ({ width = 24, height = 24 }: IconProps) => {
   return (
     <svg
       xmlns="http://www.w3.org/2000/svg"
@@ -393,6 +390,44 @@ export const RightUpArrowIcon = ({ width = 24, height = 24 }: IconProps) => {
     >
       <polyline points="10 9 15 4 20 9" />
       <path d="M4 20h7a4 4 0 0 0 4-4V4" />
+    </svg>
+  );
+};
+
+export const DownArrowIcon = ({ width = 24, height = 24 }: IconProps) => {
+  return (
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      width={width}
+      height={height}
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      stroke-width="2"
+      stroke-linecap="round"
+      stroke-linejoin="round"
+    >
+      <path d="M15 11a1 1 0 0 0 1 1h2.939a1 1 0 0 1 .75 1.811l-6.835 6.836a1.207 1.207 0 0 1-1.707 0L4.31 13.81a1 1 0 0 1 .75-1.811H8a1 1 0 0 0 1-1V9a1 1 0 0 1 1-1h4a1 1 0 0 1 1 1z" />
+      <path d="M9 4h6" />
+    </svg>
+  );
+};
+
+export const UpArrowIcon = ({ width = 24, height = 24 }: IconProps) => {
+  return (
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      width={width}
+      height={height}
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      stroke-width="2"
+      stroke-linecap="round"
+      stroke-linejoin="round"
+    >
+      <path d="m5 12 7-7 7 7" />
+      <path d="M12 19V5" />
     </svg>
   );
 };
