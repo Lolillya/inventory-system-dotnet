@@ -145,6 +145,10 @@
   --color-blue-bg: #bfe8ff;
   --color-blue-fill: #4379ee;
   --color-green-fill: #00b69b;
+  --color-red-fill: #e76e50;
+  --color-purple-bg: #e1e1ff;
+  --color-purple-fill: #8280ff;
+  --color-gray-bg: #f0f1f4;
 }
 
 @layer base {
