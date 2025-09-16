@@ -11,19 +11,20 @@ public class InventoryProduct
 {
     public static void SeedProductData(ModelBuilder modelBuilder)
     {
+        var seededAt = new DateTime(2025, 01, 01, 00, 00, 00, DateTimeKind.Utc);
         var product = new List<Product>
         {
             new Product
             {
-                Product_Id = 1,
-                Product_Code = "",
-                Product_Name = "",
-                Description = "",
-                Brand_Id = 1,
-                Category_Id = 1,
-                Variant_Id = 1,
-                CreatedAt = DateTime.UtcNow,
-                UpdatedAt = DateTime.UtcNow
+                Product_ID = 1,
+                Product_Code = "PILOT-G2-07-BLK",
+                Product_Name = "Pilot G2 0.7 Gel Pen - Black",
+                Description = "Smooth writing gel ink pen",
+                Brand_ID = 1,
+                Category_ID = 1,
+                Variant_ID = 1,
+                CreatedAt = seededAt,
+                UpdatedAt = seededAt
             }
         };
 

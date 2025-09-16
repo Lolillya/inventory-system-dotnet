@@ -11,14 +11,15 @@ public static class CategoryInventory
 {
     public static void SeedCategoryData(ModelBuilder modelBuilder)
     {
+        var seededAt = new DateTime(2025, 01, 01, 00, 00, 00, DateTimeKind.Utc);
         var category = new List<Category>
         {
             new Category
             {
-                Category_Id = 1,
-                Category_Name = "",
-                CreatedAt = DateTime.UtcNow,
-                UpdatedAt = DateTime.UtcNow
+                Category_ID = 1,
+                Category_Name = "Writing Instruments",
+                CreatedAt = seededAt,
+                UpdatedAt = seededAt
             }
         };
 

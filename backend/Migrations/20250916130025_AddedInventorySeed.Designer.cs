@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using backend.Data;
 
@@ -11,9 +12,11 @@ using backend.Data;
 namespace backend.Migrations
 {
     [DbContext(typeof(ApplicationDBContext))]
-    partial class ApplicationDBContextModelSnapshot : ModelSnapshot
+    [Migration("20250916130025_AddedInventorySeed")]
+    partial class AddedInventorySeed
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -305,8 +308,8 @@ namespace backend.Migrations
                         {
                             Brand_ID = 1,
                             BrandName = "Pilot",
-                            CreatedAt = new DateTime(2025, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc),
-                            UpdatedAt = new DateTime(2025, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc)
+                            CreatedAt = new DateTime(2025, 9, 16, 13, 0, 24, 903, DateTimeKind.Utc).AddTicks(8894),
+                            UpdatedAt = new DateTime(2025, 9, 16, 13, 0, 24, 903, DateTimeKind.Utc).AddTicks(9200)
                         });
                 });
 
@@ -336,9 +339,9 @@ namespace backend.Migrations
                         new
                         {
                             Category_ID = 1,
-                            Category_Name = "Writing Instruments",
-                            CreatedAt = new DateTime(2025, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc),
-                            UpdatedAt = new DateTime(2025, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc)
+                            Category_Name = "",
+                            CreatedAt = new DateTime(2025, 9, 16, 13, 0, 24, 904, DateTimeKind.Utc).AddTicks(3094),
+                            UpdatedAt = new DateTime(2025, 9, 16, 13, 0, 24, 904, DateTimeKind.Utc).AddTicks(3339)
                         });
                 });
 
@@ -377,11 +380,11 @@ namespace backend.Migrations
                         new
                         {
                             Inventory_ID = 1,
-                            Created_At = new DateTime(2025, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc),
+                            Created_At = new DateTime(2025, 9, 16, 13, 0, 24, 905, DateTimeKind.Utc).AddTicks(2162),
                             Inventory_Clerk = "",
                             Inventory_Number = 0,
                             Total_Quantity = 0,
-                            Updated_At = new DateTime(2025, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc),
+                            Updated_At = new DateTime(2025, 9, 16, 13, 0, 24, 905, DateTimeKind.Utc).AddTicks(2343),
                             Variant_ID = 1
                         });
                 });
@@ -431,11 +434,11 @@ namespace backend.Migrations
                             Product_ID = 1,
                             Brand_ID = 1,
                             Category_ID = 1,
-                            CreatedAt = new DateTime(2025, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc),
-                            Description = "Smooth writing gel ink pen",
-                            Product_Code = "PILOT-G2-07-BLK",
-                            Product_Name = "Pilot G2 0.7 Gel Pen - Black",
-                            UpdatedAt = new DateTime(2025, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc),
+                            CreatedAt = new DateTime(2025, 9, 16, 13, 0, 24, 904, DateTimeKind.Utc).AddTicks(7931),
+                            Description = "",
+                            Product_Code = "",
+                            Product_Name = "",
+                            UpdatedAt = new DateTime(2025, 9, 16, 13, 0, 24, 904, DateTimeKind.Utc).AddTicks(8205),
                             Variant_ID = 1
                         });
                 });
@@ -469,10 +472,10 @@ namespace backend.Migrations
                         new
                         {
                             Variant_ID = 1,
-                            CreatedAt = new DateTime(2025, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc),
+                            CreatedAt = new DateTime(2025, 9, 16, 13, 0, 24, 905, DateTimeKind.Utc).AddTicks(5208),
                             Product_ID = 1,
-                            UpdatedAt = new DateTime(2025, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc),
-                            Variant_Name = "Single Pack"
+                            UpdatedAt = new DateTime(2025, 9, 16, 13, 0, 24, 905, DateTimeKind.Utc).AddTicks(5359),
+                            Variant_Name = ""
                         });
                 });
 

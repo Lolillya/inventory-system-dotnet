@@ -11,15 +11,16 @@ public static class VariantInventory
 {
     public static void SeedVariantData(ModelBuilder modelBuilder)
     {
+        var seededAt = new DateTime(2025, 01, 01, 00, 00, 00, DateTimeKind.Utc);
         var variant = new List<Variant>
         {
             new Variant
             {
-                Variant_Id = 1,
-                Product_Id = 1,
-                Variant_Name = "",
-                CreatedAt = DateTime.UtcNow,
-                UpdatedAt = DateTime.UtcNow
+                Variant_ID = 1,
+                Product_ID = 1,
+                Variant_Name = "Single Pack",
+                CreatedAt = seededAt,
+                UpdatedAt = seededAt
             }
         };
         modelBuilder.Entity<Variant>().HasData(variant);

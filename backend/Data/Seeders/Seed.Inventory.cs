@@ -11,15 +11,16 @@ public static class SeedInventory
 {
     public static void SeedInventoryData(ModelBuilder modelBuilder)
     {
+        var seededAt = new DateTime(2025, 01, 01, 00, 00, 00, DateTimeKind.Utc);
         var inventory = new List<Inventory>
         {
             new Inventory {
-                Inventory_Id = 1,
-                Variant_Id = 1,
+                Inventory_ID = 1,
+                Variant_ID = 1,
                 Total_Quantity = 0,
                 Inventory_Number = 0,
-                Created_At = DateTime.UtcNow,
-                Updated_At = DateTime.UtcNow
+                Created_At = seededAt,
+                Updated_At = seededAt
             }
         };
 
