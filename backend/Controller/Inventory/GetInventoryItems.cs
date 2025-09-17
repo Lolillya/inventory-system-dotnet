@@ -74,7 +74,6 @@ namespace backend.Controller.Inventory
                                              UpdatedAt = inv.Updated_At
                                          }
                                      })
-                                     .AsNoTracking()
                                      .ToListAsync();
 
                 if (results == null || !results.Any())
