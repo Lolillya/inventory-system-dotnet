@@ -34,7 +34,6 @@ namespace backend.Controller.Inventory
                                      join varnt in _db.Variants on inv.Variant_ID equals varnt.Variant_ID
                                      join prod in _db.Products on varnt.Product_ID equals prod.Product_ID
                                      join brand in _db.Brands on prod.Brand_ID equals brand.Brand_ID
-                                     join cat in _db.Categories on prod.Category_ID equals cat.Category_ID
                                      select new
                                      {
                                          Product = new DtoProduct
@@ -60,19 +59,6 @@ namespace backend.Controller.Inventory
                                              CreatedAt = brand.CreatedAt,
                                              UpdatedAt = brand.UpdatedAt
                                          },
-                                         Category = new DtoCategory
-                                         {
-                                             CategoryName = cat.Category_Name,
-                                             CreatedAt = cat.CreatedAt,
-                                             UpdatedAt = cat.UpdatedAt
-                                         },
-                                         Inventory = new DtoInventory
-                                         {
-                                             TotalQuantity = new BigInteger(inv.Total_Quantity),
-                                             InventoryNumber = new BigInteger(inv.Inventory_Number),
-                                             CreatedAt = inv.Created_At,
-                                             UpdatedAt = inv.Updated_At
-                                         }
                                      })
                                      .ToListAsync();
 
