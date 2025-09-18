@@ -20,6 +20,55 @@ public static class CategoryInventory
                 Category_Name = "Writing Instruments",
                 CreatedAt = seededAt,
                 UpdatedAt = seededAt
+            },
+            new Category
+            {
+                Category_ID = 2,
+                Category_Name = "Art Supplies",
+                CreatedAt = seededAt,
+                UpdatedAt = seededAt
+            },
+            new Category
+            {
+                Category_ID = 3,
+                Category_Name = "Notebooks & Paper",
+                CreatedAt = seededAt,
+                UpdatedAt = seededAt
+            },
+            new Category
+            {
+                Category_ID = 4,
+                Category_Name = "Office Supplies",
+                CreatedAt = seededAt,
+                UpdatedAt = seededAt
+            },
+            new Category
+            {
+                Category_ID = 5,
+                Category_Name = "Classroom Tools",
+                CreatedAt = seededAt,
+                UpdatedAt = seededAt
+            },
+            new Category
+            {
+                Category_ID = 6,
+                Category_Name = "Storage & Organization",
+                CreatedAt = seededAt,
+                UpdatedAt = seededAt
+            },
+            new Category
+            {
+                Category_ID = 7,
+                Category_Name = "Technology Accessories",
+                CreatedAt = seededAt,
+                UpdatedAt = seededAt
+            },
+            new Category
+            {
+                Category_ID = 8,
+                Category_Name = "Science & Lab Supplies",
+                CreatedAt = seededAt,
+                UpdatedAt = seededAt
             }
         };
 

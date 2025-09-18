@@ -63,18 +63,6 @@ const InventoryPage = () => {
                 </div>
               </div>
             ))}
-            {/* {Array.from({ length: 20 }).map((_, i) => (
-              <div className="flex justify-between p-5 rounded-lg" key={i}>
-                <div className="flex gap-2 items-center">
-                  <span className="capitalize">item</span>
-                  <span className="capitalize">brand</span>
-                  <span className="capitalize">variant</span>
-                </div>
-                <div>
-                  <EditIcon />
-                </div>
-              </div>
-            ))} */}
           </div>
         </div>
 
