@@ -1,16 +1,26 @@
+import { NoSelectedState } from "../../../components/no-selected-state";
 import { Separator } from "../../../components/separator";
 import { UseInventoryQuery } from "../../../features/inventory/get-inventory.query";
+import { useSelectedProductQuery, useSetSelectedProduct } from "../../../features/inventory/product-selected";
 import { EditIcon, FileDownIcon, FilterIcon, PlusIcon, SearchIcon } from "../../../icons";
+import { InventoryProductModel } from "../../../models/inventory.model";
+import { SelectedProduct } from "./_components/selected-product";
 
 const InventoryPage = () => {
   const { data: inventory, isLoading, error } = UseInventoryQuery();
+  const { data: selectedProduct } = useSelectedProductQuery();
+  const setSelectedProduct = useSetSelectedProduct();
 
   // FETCH DATA LOADING STATE
   if (isLoading) return <div>Loading...</div>;
   // FETCHING DATA ERROR STATE
   if (error) return <div>Error...</div>;
 
-  // console.log(inventory);
+  console.log(selectedProduct);
+
+  const handleClick = (product: InventoryProductModel) => {
+    setSelectedProduct(product);
+  };
 
   return (
     <section>
@@ -54,7 +64,7 @@ const InventoryPage = () => {
           <div className="w-full overflow-y-scroll flex flex-col gap-2 pr-2">
             {inventory?.map((data, index) => (
               <>
-                <div className="flex justify-between p-5 rounded-lg" key={index}>
+                <div className="flex justify-between p-5 rounded-lg" key={index} onClick={() => handleClick(data)}>
                   <div className="flex gap-2 items-center">
                     <span className="capitalize">{data.product.productName}</span>
                     <span className="capitalize">{data.brand.brandName}</span>
@@ -76,12 +86,8 @@ const InventoryPage = () => {
             <label className="capitalize text-saltbox-gray font-normal text-lg">details</label>
           </div>
 
-          <div className="h-full bg-custom-gray rounded-lg flex">
-            {/* {!selectedSupplier ? (
-                <NoSelectedState />
-              ) : (
-                <SelectedUser type="supplier" {...selectedSupplier} />
-              )} */}
+          <div className="h-full bg-custom-gray rounded-lg flex p-5">
+            {!selectedProduct ? <NoSelectedState /> : <SelectedProduct {...selectedProduct} />}
           </div>
         </div>
       </div>

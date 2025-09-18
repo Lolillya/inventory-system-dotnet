@@ -204,6 +204,10 @@
     border: none;
   }
 
+  textarea {
+    @apply rounded-lg bg-white p-3 resize-none;
+  }
+
   h1 {
     @apply text-custom-black text-4xl font-bold;
   }
