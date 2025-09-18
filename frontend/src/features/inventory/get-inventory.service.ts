@@ -1,6 +1,6 @@
 import axios from "axios";
 import { handleError } from "../../helpers/error-handler.helper";
-import { api } from "../../services/API.service";
+import { api } from "../api/API.service";
 import { InventoryProductModel } from "../../models/inventory.model";
 
 export const GetInventory = async () => {

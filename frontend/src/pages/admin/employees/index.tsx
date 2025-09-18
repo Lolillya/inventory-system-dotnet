@@ -4,8 +4,8 @@ import { NoSelectedState } from "../../../components/no-selected-state";
 import { SelectedUser } from "../../../components/selected-user";
 import { Separator } from "../../../components/separator";
 import { FilterIcon, PlusIcon, SearchIcon } from "../../../icons";
-import { userEmployeesQuery } from "../../../queryOptions/employees/employee-get-all.query";
-import { useSelectedEmployeeQuery } from "../../../queryOptions/employees/empployee-selected.query";
+import { userEmployeesQuery } from "../../../features/employees/employee-get-all.query";
+import { useSelectedEmployeeQuery } from "../../../features/employees/empployee-selected.query";
 
 const EmployeesPage = () => {
   const { data: employees, isLoading, error } = userEmployeesQuery();

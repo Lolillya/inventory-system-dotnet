@@ -1,6 +1,6 @@
 import { useQuery } from "@tanstack/react-query";
 import { UserClientModel } from "../../models/user-client.model";
-import { GetAllEmployees } from "../../services/employees/get-all-employees.service";
+import { GetAllEmployees } from "./get-all-employees.service";
 
 export const userEmployeesQuery = () => {
   return useQuery<UserClientModel[]>({

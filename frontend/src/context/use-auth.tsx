@@ -1,8 +1,8 @@
 import { createContext, useEffect, useState } from "react";
 import { UserProfile } from "../models/user.model";
-import { registerAPI } from "../services/auth-service/auth-register.service";
+import { registerAPI } from "../features/auth-login/auth-register.service";
 // import { toast } from "react-toastify";
-import { loginAPI } from "../services/auth-service/auth-login.service";
+import { loginAPI } from "../features/auth-login/auth-login.service";
 import React from "react";
 import axios from "axios";
 

@@ -1,3 +1,4 @@
+import { Separator } from "../../../components/separator";
 import { UseInventoryQuery } from "../../../features/inventory/get-inventory.query";
 import { EditIcon, FileDownIcon, FilterIcon, PlusIcon, SearchIcon } from "../../../icons";
 
@@ -52,16 +53,19 @@ const InventoryPage = () => {
 
           <div className="w-full overflow-y-scroll flex flex-col gap-2 pr-2">
             {inventory?.map((data, index) => (
-              <div className="flex justify-between p-5 rounded-lg" key={index}>
-                <div className="flex gap-2 items-center">
-                  <span className="capitalize">{data.product.productName}</span>
-                  <span className="capitalize">{data.brand.brandName}</span>
-                  <span className="capitalize">{data.variant.variantName}</span>
+              <>
+                <div className="flex justify-between p-5 rounded-lg" key={index}>
+                  <div className="flex gap-2 items-center">
+                    <span className="capitalize">{data.product.productName}</span>
+                    <span className="capitalize">{data.brand.brandName}</span>
+                    <span className="capitalize">{data.variant.variantName}</span>
+                  </div>
+                  <div>
+                    <EditIcon />
+                  </div>
                 </div>
-                <div>
-                  <EditIcon />
-                </div>
-              </div>
+                <Separator />
+              </>
             ))}
           </div>
         </div>

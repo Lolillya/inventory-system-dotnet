@@ -1,7 +1,7 @@
 import { InfoCard } from "../../../components/info-card";
 import { FilterIcon, PlusIcon, SearchIcon } from "../../../icons";
-import { useSuppliersQuery } from "../../../queryOptions/suppliers/supplier-get-all.query";
-import { useSelectedSupplierQuery } from "../../../queryOptions/suppliers/supplier-selected.query";
+import { useSuppliersQuery } from "../../../features/suppliers/supplier-get-all.query";
+import { useSelectedSupplierQuery } from "../../../features/suppliers/supplier-selected.query";
 import { Separator } from "../../../components/separator";
 import { NoSelectedState } from "../../../components/no-selected-state";
 import { SelectedUser } from "../../../components/selected-user";

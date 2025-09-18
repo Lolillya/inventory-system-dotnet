@@ -1,6 +1,6 @@
 import axios from "axios";
 import { UserClientModel } from "../../models/user-client.model";
-import { api } from "../API.service";
+import { api } from "../api/API.service";
 import { handleError } from "../../helpers/error-handler.helper";
 
 export const GetAllEmployees = async () => {

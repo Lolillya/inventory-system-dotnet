@@ -3,8 +3,8 @@ import { FilterIcon, PlusIcon, SearchIcon } from "../../../icons";
 import { SelectedUser } from "../../../components/selected-user";
 import { NoSelectedState } from "../../../components/no-selected-state";
 import { Separator } from "../../../components/separator";
-import { useCustomersQuery } from "../../../queryOptions/customers/customer-get-all.query";
-import { useSelectedCustomerQuery } from "../../../queryOptions/customers/customer-selecter.query";
+import { useCustomersQuery } from "../../../features/customers/customer-get-all.query";
+import { useSelectedCustomerQuery } from "../../../features/customers/customer-selecter.query";
 import React from "react";
 
 const SuppliersPage = () => {

@@ -1,4 +1,4 @@
-import { loginAPI } from "../../services/auth-service/auth-login.service";
+import { loginAPI } from "../../features/auth-login/auth-login.service";
 
 describe("Login API Testing", () => {
   it("should return 200 for /api/auth/login API endpoint", async () => {

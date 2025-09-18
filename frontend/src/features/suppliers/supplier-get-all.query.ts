@@ -1,5 +1,5 @@
 import { useQuery } from "@tanstack/react-query";
-import { GetAllSuppliers } from "../../services/suppliers/get-all-suppliers.service";
+import { GetAllSuppliers } from "./get-all-suppliers.service";
 import { UserClientModel } from "../../models/user-client.model";
 
 export const useSuppliersQuery = () => {
