@@ -1,3 +1,4 @@
+import { useNavigate } from "react-router-dom";
 import { NoSelectedState } from "../../../components/no-selected-state";
 import { Separator } from "../../../components/separator";
 import { UseInventoryQuery } from "../../../features/inventory/get-inventory.query";
@@ -10,6 +11,7 @@ const InventoryPage = () => {
   const { data: inventory, isLoading, error } = UseInventoryQuery();
   const { data: selectedProduct } = useSelectedProductQuery();
   const setSelectedProduct = useSetSelectedProduct();
+  const navigate = useNavigate();
 
   // FETCH DATA LOADING STATE
   if (isLoading) return <div>Loading...</div>;
@@ -70,7 +72,7 @@ const InventoryPage = () => {
                     <span className="capitalize">{data.brand.brandName}</span>
                     <span className="capitalize">{data.variant.variantName}</span>
                   </div>
-                  <div>
+                  <div onClick={() => navigate(`${data.product.product_ID}/edit-product/`)}>
                     <EditIcon />
                   </div>
                 </div>

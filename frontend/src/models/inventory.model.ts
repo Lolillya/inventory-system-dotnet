@@ -1,5 +1,6 @@
 export type InventoryProductModel = {
   product: {
+    product_ID: number;
     productCode: string;
     productName: string;
     desc: string;

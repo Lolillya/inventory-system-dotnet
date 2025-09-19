@@ -7,6 +7,7 @@ import SuppliersPage from "../pages/admin/suppliers";
 import CustomersPage from "../pages/admin/customers";
 import InventoryPage from "../pages/admin/inventory";
 import EmployeesPage from "../pages/admin/employees";
+import { EditProductPage } from "../pages/admin/inventory/edit-product";
 
 export const router = createBrowserRouter([
   {
@@ -43,6 +44,10 @@ export const router = createBrowserRouter([
           {
             path: "inventory",
             element: <InventoryPage />,
+          },
+          {
+            path: "inventory/:id/edit-product",
+            element: <EditProductPage />
           },
           {
             path: "employees",

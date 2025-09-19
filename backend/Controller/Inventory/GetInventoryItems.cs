@@ -38,6 +38,7 @@ namespace backend.Controller.Inventory
                                      {
                                          Product = new DtoProduct
                                          {
+                                             Product_ID = prod.Product_ID,
                                              ProductCode = prod.Product_Code,
                                              ProductName = prod.Product_Name,
                                              Description = prod.Description,

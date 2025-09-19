@@ -9,6 +9,8 @@ namespace backend.Dtos.Inventory
     public class Product
     {
         [Required]
+        public int Product_ID { get; set; }
+        [Required]
         public string ProductCode { get; set; }
         [Required]
         public string ProductName { get; set; }
