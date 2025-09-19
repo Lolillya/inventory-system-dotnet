@@ -8,6 +8,7 @@ import CustomersPage from "../pages/admin/customers";
 import InventoryPage from "../pages/admin/inventory";
 import EmployeesPage from "../pages/admin/employees";
 import { EditProductPage } from "../pages/admin/inventory/edit-product";
+import InvoicePage from "../pages/admin/invoice";
 
 export const router = createBrowserRouter([
   {
@@ -34,6 +35,10 @@ export const router = createBrowserRouter([
             element: <DashboardPage />,
           },
           {
+            path: "invoice",
+            element: <InvoicePage />,
+          },
+          {
             path: "suppliers",
             element: <SuppliersPage />,
           },
@@ -47,7 +52,7 @@ export const router = createBrowserRouter([
           },
           {
             path: "inventory/:id/edit-product",
-            element: <EditProductPage />
+            element: <EditProductPage />,
           },
           {
             path: "employees",

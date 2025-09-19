@@ -11,7 +11,7 @@ export const EditProductPage = () => {
   const navigate = useNavigate();
 
   useEffect(() => {
-    if (!selectedProduct) navigate(-1);
+    if (!selectedProduct) navigate("admin/inventory");
   }, []);
 
   return (
