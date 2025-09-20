@@ -1,10 +1,11 @@
 import { NoSelectedState } from "@/components/no-selected-state";
 import { UseInventoryQuery } from "@/features/inventory/get-inventory.query";
 import { HandshakeIcon, SearchIcon } from "@/icons";
+import { ProductCard } from "./_components/product-card";
 
 const NewInvoicePage = () => {
   const { data: inventoryData, isLoading, error } = UseInventoryQuery();
-  console.log(inventoryData);
+  // console.log(inventoryData);
 
   return (
     <section>
@@ -37,29 +38,9 @@ const NewInvoicePage = () => {
                 </div>
 
                 <div className="pr-2 flex flex-col gap-5 overflow-y-scroll flex-1 h-full">
-                  {/* {[...Array(20)].map((_, i) => (
-                    <div className="flex flex-col gap-3" key={i}>
-                      <div className="flex justify-between bg-gray-bg rounded-lg py-2 px-2 text-xs items-center">
-                        <div className="flex gap-3 items-center">
-                          <span>name</span>
-                          <span>brand</span>
-                          <span>variant</span>
-                        </div>
-                        <span># batches</span>
-                      </div>
-                    </div>
-                  ))} */}
                   {inventoryData?.map((data, i) => (
-                    <div className="flex flex-col gap-3" key={i}>
-                      <div className="flex justify-between bg-gray-bg rounded-lg py-2 px-2 text-xs items-center">
-                        <div className="flex gap-3 items-center">
-                          <span>{data.product.productName}</span>
-                          <span>{data.brand.brandName}</span>
-                          <span>{data.variant.variantName}</span>
-                        </div>
-                        <span># batches</span>
-                      </div>
-                    </div>
+                    
+                    <ProductCard product={data} key={i}/>
                   ))}
                 </div>
               </div>
