@@ -40,7 +40,7 @@ const NewInvoicePage = () => {
               {selectedInvoices.length === 0 ? (
                 <NoSelectedState />
               ) : (
-                <div className="flex flex-col gap-2 flex-wrap h-full overflow-y-scroll flex-1">
+                <div className="flex gap-2 flex-wrap h-full overflow-y-auto flex-1 justify-between pr-2">
                   {selectedInvoices.map((product, index) => (
                     <InvoiceCard 
                       key={`${product.product.product_ID}-${product.variant.variantName}-${index}`}

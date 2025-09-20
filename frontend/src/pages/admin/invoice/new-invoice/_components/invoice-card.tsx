@@ -10,7 +10,7 @@ interface InvoiceCardProp {
 
 export const InvoiceCard = ({ product, onRemove }: InvoiceCardProp) => {
   return (
-    <div className="p-5 border shadow-lg rounded-lg h-fit text-xs">
+    <div className="p-5 border shadow-lg rounded-lg h-fit w-full max-w-[30rem] text-xs">
       <div className="flex gap-2 items-center text-xs justify-between">
         <div className="flex gap-2 items-center">
           <div className="w-2 h-2 bg-orange-300 rounded-full" />
