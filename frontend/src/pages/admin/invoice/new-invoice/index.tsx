@@ -1,11 +1,15 @@
 import { NoSelectedState } from "@/components/no-selected-state";
 import { UseInventoryQuery } from "@/features/inventory/get-inventory.query";
-import { HandshakeIcon, SearchIcon } from "@/icons";
+import { SearchIcon } from "@/icons";
 import { ProductCard } from "./_components/product-card";
+import { InventoryProductModel } from "@/models/inventory.model";
 
 const NewInvoicePage = () => {
   const { data: inventoryData, isLoading, error } = UseInventoryQuery();
-  // console.log(inventoryData);
+
+  const handleClick = (data: InventoryProductModel) => {
+    console.log(data);
+  };
 
   return (
     <section>
@@ -39,8 +43,7 @@ const NewInvoicePage = () => {
 
                 <div className="pr-2 flex flex-col gap-5 overflow-y-scroll flex-1 h-full">
                   {inventoryData?.map((data, i) => (
-                    
-                    <ProductCard product={data} key={i}/>
+                    <ProductCard product={data} onClick={() => handleClick(data)} key={i} />
                   ))}
                 </div>
               </div>
