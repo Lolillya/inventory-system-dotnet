@@ -36,5 +36,9 @@ export const useSelectedInvoiceProduct = () => {
     );
   };
 
-  return { addProduct, removeProduct };
+  const clearList = () => {
+    queryClient.setQueryData<InventoryProductModel[]>(InvoiceProductKey, []);
+  };
+
+  return { addProduct, removeProduct, clearList };
 };

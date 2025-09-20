@@ -9,7 +9,7 @@ import { InvoiceCard } from "./_components/invoice-card";
 const NewInvoicePage = () => {
   const { data: inventoryData, isLoading, error } = UseInventoryQuery();
   const { data: selectedInvoices = [] } = useSelectedProductInvoiceQuery();
-  const { addProduct, removeProduct } = useSelectedInvoiceProduct();
+  const { addProduct, removeProduct, clearList } = useSelectedInvoiceProduct();
 
   // FETCH DATA LOADING STATE
   if (isLoading) return <div>Loading...</div>;
@@ -18,6 +18,10 @@ const NewInvoicePage = () => {
 
   const handleClick = (data: InventoryProductModel) => {
     addProduct(data);
+  };
+
+  const removeAll = () => {
+    clearList();
   };
 
   return (
@@ -40,11 +44,11 @@ const NewInvoicePage = () => {
               {selectedInvoices.length === 0 ? (
                 <NoSelectedState />
               ) : (
-                <div className="flex gap-2 flex-wrap h-full overflow-y-auto flex-1 justify-between pr-2">
+                <div className="flex gap-2 flex-wrap h-full overflow-y-auto flex-1 pr-2">
                   {selectedInvoices.map((product, index) => (
-                    <InvoiceCard 
+                    <InvoiceCard
                       key={`${product.product.product_ID}-${product.variant.variantName}-${index}`}
-                      product={product} 
+                      product={product}
                       onRemove={() => removeProduct(product)}
                     />
                   ))}
@@ -72,7 +76,7 @@ const NewInvoicePage = () => {
               </div>
 
               <div className="flex gap-5 justify-between">
-                <button>clear</button>
+                <button onClick={clearList}>clear</button>
                 <button>create invoice</button>
               </div>
             </div>
