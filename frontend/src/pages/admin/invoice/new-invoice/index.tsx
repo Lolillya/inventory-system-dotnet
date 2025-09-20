@@ -1,14 +1,24 @@
 import { NoSelectedState } from "@/components/no-selected-state";
 import { UseInventoryQuery } from "@/features/inventory/get-inventory.query";
-import { LeftArrowIcon, SearchIcon } from "@/icons";
+import { ChevronDownIcon, ChevronUpIcon, LeftArrowIcon, SearchIcon, XIcon } from "@/icons";
 import { ProductCard } from "./_components/product-card";
 import { InventoryProductModel } from "@/models/inventory.model";
+import { useSelectedProductInvoiceQuery, useSelectedInvoiceProduct } from "@/features/invoice/selected-product";
+import { Separator } from "@/components/separator";
+import { InvoiceCard } from "./_components/invoice-card";
 
 const NewInvoicePage = () => {
   const { data: inventoryData, isLoading, error } = UseInventoryQuery();
+  const { data: selectedInvoice } = useSelectedProductInvoiceQuery();
+  const setInvoiceProduct = useSelectedInvoiceProduct();
+
+  // FETCH DATA LOADING STATE
+  if (isLoading) return <div>Loading...</div>;
+  // FETCHING DATA ERROR STATE
+  if (error) return <div>Error...</div>;
 
   const handleClick = (data: InventoryProductModel) => {
-    console.log(data);
+    setInvoiceProduct(data);
   };
 
   return (
@@ -27,8 +37,8 @@ const NewInvoicePage = () => {
         <div className="flex flex-col gap-10 overflow-y-hidden flex-1">
           <div className="flex gap-5 overflow-y-hidden flex-1">
             {/* LEFT */}
-            <div className="w-full flex border rounded-lg shadow-lg">
-              <NoSelectedState />
+            <div className="w-full flex">
+              {!selectedInvoice ? <NoSelectedState /> : <InvoiceCard product={selectedInvoice} />}
             </div>
             {/* RIGHT */}
             <div className="flex flex-col w-2/5 gap-5">
@@ -48,6 +58,7 @@ const NewInvoicePage = () => {
                   ))}
                 </div>
               </div>
+              
               <div className="flex gap-5 justify-between">
                 <button>clear</button>
                 <button>create invoice</button>

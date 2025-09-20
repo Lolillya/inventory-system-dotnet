@@ -3,6 +3,7 @@ import { Separator } from "../../../components/separator";
 import { EllipsisIcon, FileDownIcon, FilterIcon, PlusIcon, SearchIcon } from "../../../icons";
 
 const InvoicePage = () => {
+  const { data: selectedInvoice } = useSelectedInvoiceProduct();
   const navigate = useNavigate();
   return (
     <section>
