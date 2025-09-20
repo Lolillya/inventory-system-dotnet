@@ -1,6 +1,6 @@
 import { NoSelectedState } from "@/components/no-selected-state";
 import { UseInventoryQuery } from "@/features/inventory/get-inventory.query";
-import { SearchIcon } from "@/icons";
+import { LeftArrowIcon, SearchIcon } from "@/icons";
 import { ProductCard } from "./_components/product-card";
 import { InventoryProductModel } from "@/models/inventory.model";
 
@@ -15,7 +15,8 @@ const NewInvoicePage = () => {
     <section>
       <div className="flex flex-col min-h-0 flex-1 gap-5">
         <div className="flex flex-col gap-10">
-          <div className="flex gap-3 border-b pb-5">
+          <div className="flex gap-3 border-b pb-5 items-center">
+            <LeftArrowIcon />
             <span>new invoice</span>
             <span>#123456</span>
             {/* <span>{selectedProduct?.product.product_ID}</span> */}
