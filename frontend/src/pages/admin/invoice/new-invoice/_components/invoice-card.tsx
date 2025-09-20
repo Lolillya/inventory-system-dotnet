@@ -5,11 +5,12 @@ import { InventoryProductModel } from "@/models/inventory.model";
 interface InvoiceCardProp {
   onClick?: () => void;
   product: InventoryProductModel;
+  onRemove?: () => void;
 }
 
-export const InvoiceCard = ({ product }: InvoiceCardProp) => {
+export const InvoiceCard = ({ product, onRemove }: InvoiceCardProp) => {
   return (
-    <div className="p-5 border shadow-lg rounded-lg h-fit">
+    <div className="p-5 border shadow-lg rounded-lg h-fit text-xs">
       <div className="flex gap-2 items-center text-xs justify-between">
         <div className="flex gap-2 items-center">
           <div className="w-2 h-2 bg-orange-300 rounded-full" />
@@ -17,7 +18,9 @@ export const InvoiceCard = ({ product }: InvoiceCardProp) => {
           <span>{product.brand.brandName}</span>
           <span>{product.variant.variantName}</span>
         </div>
-        <XIcon />
+        <div onClick={onRemove} className="cursor-pointer hover:bg-gray-200 rounded p-1">
+          <XIcon />
+        </div>
       </div>
 
       <Separator orientation="horizontal" />
@@ -55,7 +58,7 @@ export const InvoiceCard = ({ product }: InvoiceCardProp) => {
           </div>
         </div>
 
-        <div className="flex gap-2 items-center text-xs justify-between">
+        <div className="flex gap-2 items-center justify-between">
           <div className="flex gap-2">
             <span>item price</span>
           </div>

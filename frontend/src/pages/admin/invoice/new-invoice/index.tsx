@@ -1,16 +1,15 @@
 import { NoSelectedState } from "@/components/no-selected-state";
 import { UseInventoryQuery } from "@/features/inventory/get-inventory.query";
-import { ChevronDownIcon, ChevronUpIcon, LeftArrowIcon, SearchIcon, XIcon } from "@/icons";
+import { LeftArrowIcon, SearchIcon } from "@/icons";
 import { ProductCard } from "./_components/product-card";
 import { InventoryProductModel } from "@/models/inventory.model";
 import { useSelectedProductInvoiceQuery, useSelectedInvoiceProduct } from "@/features/invoice/selected-product";
-import { Separator } from "@/components/separator";
 import { InvoiceCard } from "./_components/invoice-card";
 
 const NewInvoicePage = () => {
   const { data: inventoryData, isLoading, error } = UseInventoryQuery();
-  const { data: selectedInvoice } = useSelectedProductInvoiceQuery();
-  const setInvoiceProduct = useSelectedInvoiceProduct();
+  const { data: selectedInvoices = [] } = useSelectedProductInvoiceQuery();
+  const { addProduct, removeProduct } = useSelectedInvoiceProduct();
 
   // FETCH DATA LOADING STATE
   if (isLoading) return <div>Loading...</div>;
@@ -18,7 +17,7 @@ const NewInvoicePage = () => {
   if (error) return <div>Error...</div>;
 
   const handleClick = (data: InventoryProductModel) => {
-    setInvoiceProduct(data);
+    addProduct(data);
   };
 
   return (
@@ -38,8 +37,21 @@ const NewInvoicePage = () => {
           <div className="flex gap-5 overflow-y-hidden flex-1">
             {/* LEFT */}
             <div className="w-full flex">
-              {!selectedInvoice ? <NoSelectedState /> : <InvoiceCard product={selectedInvoice} />}
+              {selectedInvoices.length === 0 ? (
+                <NoSelectedState />
+              ) : (
+                <div className="flex flex-col gap-2 flex-wrap h-full overflow-y-scroll flex-1">
+                  {selectedInvoices.map((product, index) => (
+                    <InvoiceCard 
+                      key={`${product.product.product_ID}-${product.variant.variantName}-${index}`}
+                      product={product} 
+                      onRemove={() => removeProduct(product)}
+                    />
+                  ))}
+                </div>
+              )}
             </div>
+
             {/* RIGHT */}
             <div className="flex flex-col w-2/5 gap-5">
               <div className="rounded-lg shadow-lg p-5 border h-full overflow-y-hidden flex-1 flex flex-col gap-5">
@@ -58,7 +70,7 @@ const NewInvoicePage = () => {
                   ))}
                 </div>
               </div>
-              
+
               <div className="flex gap-5 justify-between">
                 <button>clear</button>
                 <button>create invoice</button>
