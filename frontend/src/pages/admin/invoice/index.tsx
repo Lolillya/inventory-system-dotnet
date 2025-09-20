@@ -1,7 +1,9 @@
+import { useNavigate } from "react-router-dom";
 import { Separator } from "../../../components/separator";
 import { EllipsisIcon, FileDownIcon, FilterIcon, PlusIcon, SearchIcon } from "../../../icons";
 
 const InvoicePage = () => {
+  const navigate = useNavigate();
   return (
     <section>
       <div className="w-full mb-8">
@@ -19,8 +21,8 @@ const InvoicePage = () => {
             </div>
           </div>
 
-          <div className="flex w-full justify-end gap-2">
-            <button className="flex items-center justify-center gap-2">
+          <div className="flex w/full justify-end gap-2">
+            <button className="flex items-center justify-center gap-2" onClick={() => navigate("/admin/invoice/new")}>
               <PlusIcon />
               new invoice
             </button>
@@ -30,44 +32,44 @@ const InvoicePage = () => {
 
       <div className="flex flex-col gap-5 overflow-y-scroll pb-5 pr-2">
         {[...Array(20)].map((_, idx) => (
-        <div key={idx} className="flex flex-col justify-between gap-5 border shadow-lg rounded-lg p-5">
-          <div className="flex flex-1 p-3">
-            <div className="flex flex-col gap-3 w-full">
-              <div className="flex gap-3">
-                <span>#{String(123456 + idx)}</span>
-                <span>-</span>
-                <span>September 29, 2024</span>
+          <div key={idx} className="flex flex-col justify-between gap-5 border shadow-lg rounded-lg p-5">
+            <div className="flex flex-1 p-3">
+              <div className="flex flex-col gap-3 w-full">
+                <div className="flex gap-3">
+                  <span>#{String(123456 + idx)}</span>
+                  <span>-</span>
+                  <span>September 29, 2024</span>
+                </div>
+
+                <div className="flex gap-3">
+                  <span>customer name</span>
+                  <span>|</span>
+                  <span>term:</span>
+                  <span>00</span>
+                </div>
               </div>
 
-              <div className="flex gap-3">
-                <span>customer name</span>
-                <span>|</span>
-                <span>term:</span>
-                <span>00</span>
+              <Separator orientation="vertical" />
+
+              <div className="flex flex-col gap-3 w-full">
+                <div className="flex gap-3">
+                  <span>grand total</span>
+                </div>
+
+                <div className="flex gap-3">
+                  <span>P 0000.00</span>
+                </div>
+              </div>
+
+              <div className="bg-gray-bg border flex items-center justify-center rounded-lg p-2 h-12 w-12 my-auto">
+                <EllipsisIcon />
               </div>
             </div>
 
-            <Separator orientation="vertical" />
-
-            <div className="flex flex-col gap-3 w-full">
-              <div className="flex gap-3">
-                <span>grand total</span>
-              </div>
-
-              <div className="flex gap-3">
-                <span>P 0000.00</span>
-              </div>
-            </div>
-
-            <div className="bg-gray-bg border flex items-center justify-center rounded-lg p-2 h-12 w-12 my-auto">
-              <EllipsisIcon />
+            <div className="flex justify-center">
+              <span>view all</span>
             </div>
           </div>
-
-          <div className="flex justify-center">
-            <span>view all</span>
-          </div>
-        </div>
         ))}
       </div>
     </section>

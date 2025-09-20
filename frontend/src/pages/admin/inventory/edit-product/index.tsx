@@ -1,7 +1,6 @@
 import { useNavigate, useParams } from "react-router-dom";
 import { useSelectedProductQuery } from "../../../../features/inventory/product-selected";
 import { useEffect } from "react";
-import { Separator } from "../../../../components/separator";
 import { ProductDetails } from "./_components/product-details";
 import { ProductVariantCard } from "./_components/product-variant-card";
 

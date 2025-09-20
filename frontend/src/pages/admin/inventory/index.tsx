@@ -18,8 +18,6 @@ const InventoryPage = () => {
   // FETCHING DATA ERROR STATE
   if (error) return <div>Error...</div>;
 
-  console.log(selectedProduct);
-
   const handleClick = (product: InventoryProductModel) => {
     setSelectedProduct(product);
   };
