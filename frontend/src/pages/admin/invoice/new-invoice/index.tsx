@@ -20,9 +20,9 @@ const NewInvoicePage = () => {
     addProduct(data);
   };
 
-  const removeAll = () => {
-    clearList();
-  };
+  const createInvoice = () => {
+    console.log(selectedInvoices)
+  }
 
   return (
     <section>
@@ -77,7 +77,7 @@ const NewInvoicePage = () => {
 
               <div className="flex gap-5 justify-between">
                 <button onClick={clearList}>clear</button>
-                <button>create invoice</button>
+                <button onClick={createInvoice}>create invoice</button>
               </div>
             </div>
           </div>
