@@ -1,6 +1,6 @@
 export const InvoiceTable = () => {
   return (
-    <div className="flex-1 flex flex-col overflow-hidden rounded-lg border">
+    <div className="flex-1 flex flex-col overflow-hidden gap-2">
       {/* TABLE DATA HEADERS */}
       <div className="flex justify-between py-3 px-5 bg-custom-gray rounded-lg">
         <label className="text-left">Item</label>
@@ -23,6 +23,27 @@ export const InvoiceTable = () => {
             <span className="text-right">P 0000.00</span>
           </div>
         ))}
+      </div>
+
+      <span className="text-vesper-gray text-xs">
+        Note: This order includes more than 10 items. We'll move the additional
+        items to new invoices accordingly.
+      </span>
+
+      <div className="flex justify-between">
+        <div className="flex flex-col">
+          <div className="flex gap-2  text-sm tracking-wider">
+            <span className="text-vesper-gray">P 0000.00</span>
+            <label className="text-vesper-gray ">Discount</label>
+          </div>
+
+          <div className="flex gap-2 font-bold tracking-wider">
+            <span>TOTAL: </span>
+            <label>P 0000.00</label>
+          </div>
+        </div>
+
+        <button>Save</button>
       </div>
     </div>
   );

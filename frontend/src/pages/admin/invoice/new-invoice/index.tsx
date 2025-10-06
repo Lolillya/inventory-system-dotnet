@@ -27,14 +27,12 @@ const NewInvoicePage = () => {
   };
 
   const createInvoice = () => {
-    setIsModalOpen(!isModalOpen);
+    setIsModalOpen((prev) => !prev);
   };
-
-  console.log(isModalOpen);
 
   return (
     <section>
-      {isModalOpen && <CreateInvoiceModal />}
+      {isModalOpen && <CreateInvoiceModal createInvoice={createInvoice} />}
       <div className="flex flex-col min-h-0 flex-1 gap-5">
         <div className="flex flex-col gap-10">
           <div className="flex gap-3 border-b pb-5 items-center">
