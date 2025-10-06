@@ -227,6 +227,18 @@
     @apply text-custom-black text-base font-medium;
   }
 
+  th {
+    @apply text-custom-black bg-custom-gray px-6 py-3;
+  }
+
+  thead {
+    @apply p-3 rounded-lg;
+  }
+
+  table {
+    @apply rounded-lg;
+  }
+
   .info-name {
     @apply capitalize text-custom-black;
   }

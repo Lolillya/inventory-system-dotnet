@@ -3,13 +3,19 @@ import { UseInventoryQuery } from "@/features/inventory/get-inventory.query";
 import { LeftArrowIcon, SearchIcon } from "@/icons";
 import { ProductCard } from "./_components/product-card";
 import { InventoryProductModel } from "@/models/inventory.model";
-import { useSelectedProductInvoiceQuery, useSelectedInvoiceProduct } from "@/features/invoice/selected-product";
+import {
+  useSelectedProductInvoiceQuery,
+  useSelectedInvoiceProduct,
+} from "@/features/invoice/selected-product";
 import { InvoiceCard } from "./_components/invoice-card";
+import { useState } from "react";
+import { CreateInvoiceModal } from "./_components/invoice-modal";
 
 const NewInvoicePage = () => {
   const { data: inventoryData, isLoading, error } = UseInventoryQuery();
   const { data: selectedInvoices = [] } = useSelectedProductInvoiceQuery();
   const { addProduct, removeProduct, clearList } = useSelectedInvoiceProduct();
+  const [isModalOpen, setIsModalOpen] = useState(false);
 
   // FETCH DATA LOADING STATE
   if (isLoading) return <div>Loading...</div>;
@@ -21,11 +27,14 @@ const NewInvoicePage = () => {
   };
 
   const createInvoice = () => {
-    console.log(selectedInvoices)
-  }
+    setIsModalOpen(!isModalOpen);
+  };
+
+  console.log(isModalOpen);
 
   return (
     <section>
+      {isModalOpen && <CreateInvoiceModal />}
       <div className="flex flex-col min-h-0 flex-1 gap-5">
         <div className="flex flex-col gap-10">
           <div className="flex gap-3 border-b pb-5 items-center">
@@ -70,7 +79,11 @@ const NewInvoicePage = () => {
 
                 <div className="pr-2 flex flex-col gap-5 overflow-y-scroll flex-1 h-full">
                   {inventoryData?.map((data, i) => (
-                    <ProductCard product={data} onClick={() => handleClick(data)} key={i} />
+                    <ProductCard
+                      product={data}
+                      onClick={() => handleClick(data)}
+                      key={i}
+                    />
                   ))}
                 </div>
               </div>
