@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -12,12 +13,24 @@ namespace backend.Models.Invoice
         public int Invoice_ID { get; set; }
         public int Invoice_Number { get; set; }
         public string? Notes { get; set; }
-        public int Customer_ID { get; set; }
-        public int Invoice_Clerk { get; set; }
+
+        // FKs
+        public string Customer_ID { get; set; } = null!;
+        public string Invoice_Clerk { get; set; } = null!;
+
+        [ForeignKey(nameof(Customer_ID))]
+        public PersonalDetails Customer { get; set; } = null!;
+        [ForeignKey(nameof(Invoice_Clerk))]
+        public PersonalDetails Clerk { get; set; } = null!;
+
         public DateTime CreatedAt { get; set; }
         public DateTime UpdatedAt { get; set; }
-        public float Total_Amount { get; set; }
-        public float Discount { get; set; }
+
+        [Column(TypeName = "decimal(18,2)")]
+        public decimal Total_Amount { get; set; }
+
+        [Column(TypeName = "decimal(18,2)")]
+        public decimal Discount { get; set; }
         public string? Status { get; set; }
         public int Term { get; set; }
     }
