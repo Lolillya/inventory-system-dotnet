@@ -46,6 +46,7 @@ namespace backend.Data
             Seeders.InventoryProduct.SeedProductData(builder);
             Seeders.SeedInventory.SeedInventoryData(builder);
             Seeders.VariantInventory.SeedVariantData(builder);
+            Seeders.SeedInvoice.SeedInvoiceData(builder);
 
             builder.Entity<backend.Models.Invoice.Invoice>(entity =>
             {
