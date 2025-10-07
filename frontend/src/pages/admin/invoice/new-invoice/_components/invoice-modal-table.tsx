@@ -1,26 +1,33 @@
+import { Separator } from "@/components/separator";
+import { useSelectedProductInvoiceQuery } from "@/features/invoice/selected-product";
+
 export const InvoiceTable = () => {
+  const { data: selectedInvoices = [] } = useSelectedProductInvoiceQuery();
   return (
     <div className="flex-1 flex flex-col overflow-hidden gap-2">
       {/* TABLE DATA HEADERS */}
-      <div className="flex justify-between py-3 px-5 bg-custom-gray rounded-lg">
-        <label className="text-left">Item</label>
-        <label className="text-left">Quantity</label>
-        <label className="text-left">Unit</label>
-        <label className="text-right">Unit Price</label>
-        <label className="text-right">Discount</label>
-        <label className="text-right">Subtotal</label>
+      <div className="flex justify-between py-3 px-5 bg-custom-gray rounded-lg gap-2">
+        <label className="text-left w-full">Item</label>
+        <label className="text-left w-full">Quantity</label>
+        <label className="text-left w-full">Unit</label>
+        <label className="text-right w-full">Unit Price</label>
+        <label className="text-right w-full">Discount</label>
+        <label className="text-right w-full">Subtotal</label>
       </div>
 
       {/* TABLE DATA BODY */}
       <div className="overflow-auto flex flex-col h-full">
-        {[...Array(20)].map((_, i) => (
-          <div className="py-3 px-5 flex justify-between" key={i}>
-            <span className="text-left">Item</span>
-            <span className="text-left">99</span>
-            <span className="text-left">Boxed</span>
-            <span className="text-right">P 0000.00</span>
-            <span className="text-right">0%</span>
-            <span className="text-right">P 0000.00</span>
+        {selectedInvoices.map((item, i) => (
+          <div
+            className={`py-3 px-5 flex justify-between gap-2 rounded-lg items-center ${i % 2 != 0 && "bg-custom-gray"}`}
+            key={i}
+          >
+            <span className="text-left w-full">{item.product.productName}</span>
+            <span className="text-left w-full">99</span>
+            <span className="text-left w-full">Boxed</span>
+            <span className="text-right w-full">P 0000.00</span>
+            <span className="text-right w-full">0%</span>
+            <span className="text-right w-full">P 0000.00</span>
           </div>
         ))}
       </div>
