@@ -10,11 +10,15 @@ import {
 import { InvoiceCard } from "./_components/invoice-card";
 import { useState } from "react";
 import { CreateInvoiceModal } from "./_components/invoice-modal";
+import { InvoiceProductModel, units } from "@/models/invoice.model";
 
 const NewInvoicePage = () => {
+  // GLOBAL STATES
   const { data: inventoryData, isLoading, error } = UseInventoryQuery();
   const { data: selectedInvoices = [] } = useSelectedProductInvoiceQuery();
   const { addProduct, removeProduct, clearList } = useSelectedInvoiceProduct();
+
+  // LOCAL STATES
   const [isModalOpen, setIsModalOpen] = useState(false);
 
   // FETCH DATA LOADING STATE
@@ -23,13 +27,27 @@ const NewInvoicePage = () => {
   if (error) return <div>Error...</div>;
 
   const handleClick = (data: InventoryProductModel) => {
-    addProduct(data);
+    const invoice: InvoiceProductModel = {
+      item: {
+        invoice: data,
+        unit: units.NONE,
+        unit_quantity: 0,
+        unit_price: 0,
+        discount: 0,
+        total: 0,
+      },
+    };
+
+    addProduct(invoice);
   };
 
   const createInvoice = () => {
     setIsModalOpen((prev) => !prev);
   };
 
+  // `updateInvoice` comes from the global hook and is used by the modal/table to update items
+
+  console.log(selectedInvoices);
   return (
     <section>
       {isModalOpen && <CreateInvoiceModal createInvoice={createInvoice} />}
@@ -54,8 +72,8 @@ const NewInvoicePage = () => {
                 <div className="flex gap-2 flex-wrap h-full overflow-y-auto flex-1 pr-2">
                   {selectedInvoices.map((product, index) => (
                     <InvoiceCard
-                      key={`${product.product.product_ID}-${product.variant.variantName}-${index}`}
-                      product={product}
+                      key={`${product.item.invoice.product.product_ID}-${product.item.invoice.variant.variantName}-${index}`}
+                      product={product.item.invoice}
                       onRemove={() => removeProduct(product)}
                     />
                   ))}

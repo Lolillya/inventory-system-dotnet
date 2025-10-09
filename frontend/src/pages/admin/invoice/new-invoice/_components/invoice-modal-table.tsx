@@ -22,7 +22,9 @@ export const InvoiceTable = () => {
             className={`py-3 px-5 flex justify-between gap-2 rounded-lg items-center ${i % 2 != 0 && "bg-custom-gray"}`}
             key={i}
           >
-            <span className="text-left w-full">{item.product.productName}</span>
+            <span className="text-left w-full">
+              {item.item.invoice.product.productName}
+            </span>
             <span className="text-left w-full">99</span>
             <span className="text-left w-full">Boxed</span>
             <span className="text-right w-full">P 0000.00</span>
