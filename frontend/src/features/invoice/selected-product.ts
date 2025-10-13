@@ -60,8 +60,6 @@ export const useSelectedInvoiceProduct = () => {
           item: {
             ...target.item,
             unit_quantity,
-            total:
-              unit_quantity * target.item.unit_price - target.item.discount,
           },
         };
         const newArr = [...old];
@@ -95,8 +93,6 @@ export const useSelectedInvoiceProduct = () => {
           item: {
             ...target.item,
             unit_price,
-            total:
-              target.item.unit_quantity * unit_price - target.item.discount,
           },
         };
         const newArr = [...old];
@@ -105,6 +101,40 @@ export const useSelectedInvoiceProduct = () => {
           "[selected-product] updateInvoiceUnitPriceByKey ->",
           newArr
         );
+        return newArr;
+      }
+    );
+  };
+
+  // Update discount by product id and optional variant name
+  const updateInvoiceDiscountByKey = (
+    productId: string | number,
+    discount: number,
+    variantName?: string
+  ) => {
+    queryClient.setQueryData<InvoiceProductModel[]>(
+      InvoiceProductKey,
+      (old = []) => {
+        const idx = old.findIndex(
+          (p) =>
+            String(p.item.invoice.product.product_ID) === String(productId) &&
+            (variantName
+              ? p.item.invoice.variant.variantName === variantName
+              : true)
+        );
+        if (idx === -1) return old;
+
+        const target = old[idx];
+        const updatedItem: InvoiceProductModel = {
+          ...target,
+          item: {
+            ...target.item,
+            discount,
+          },
+        };
+        const newArr = [...old];
+        newArr[idx] = updatedItem;
+        console.log("[selected-product] updateInvoiceDiscountByKey ->", newArr);
         return newArr;
       }
     );
@@ -139,6 +169,7 @@ export const useSelectedInvoiceProduct = () => {
     removeProduct,
     updateInvoiceQuantityByKey,
     updateInvoiceUnitPriceByKey,
+    updateInvoiceDiscountByKey,
     clearList,
   };
 };
