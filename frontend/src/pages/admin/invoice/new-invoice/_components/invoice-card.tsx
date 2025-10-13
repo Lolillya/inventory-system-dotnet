@@ -13,7 +13,8 @@ interface InvoiceCardProp {
 }
 
 export const InvoiceCard = ({ product, onRemove }: InvoiceCardProp) => {
-  const { updateInvoiceQuantityByKey } = useSelectedInvoiceProduct();
+  const { updateInvoiceQuantityByKey, updateInvoiceUnitPriceByKey } =
+    useSelectedInvoiceProduct();
   const { data: selelctedInvoice } = useSelectedProductInvoiceQuery();
 
   // console.log(selelctedInvoice);
@@ -100,6 +101,13 @@ export const InvoiceCard = ({ product, onRemove }: InvoiceCardProp) => {
               <input
                 placeholder="20"
                 className="drop-shadow-none rounded-r-none bg-gray-bg"
+                onChange={(e) =>
+                  updateInvoiceUnitPriceByKey(
+                    product.product.product_ID,
+                    Number(e.target.value),
+                    product.variant.variantName
+                  )
+                }
               />
               <input
                 placeholder="boxes"
