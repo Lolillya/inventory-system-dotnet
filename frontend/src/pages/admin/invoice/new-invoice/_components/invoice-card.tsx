@@ -69,7 +69,6 @@ export const InvoiceCard = ({ product, onRemove }: InvoiceCardProp) => {
         <div className="bg-white p-1 rounded-lg">
           <PlusIcon />
         </div>
-
       </div>
 
       <Separator orientation="horizontal" />
@@ -140,9 +139,14 @@ export const InvoiceCard = ({ product, onRemove }: InvoiceCardProp) => {
                   )
                 }
               />
-              <input
-                className="drop-shadow-none rounded-l-none border-l-gray border-l bg-custom-gray w-full"
-              />
+              <select
+                className="drop-shadow-none rounded-l-none border-l-gray border-l bg-custom-gray w-full rounded-r-lg pl-6"
+                // value={discount}
+                // onChange={(e) => setDiscount(e.target.value as DiscountEnum)}
+              >
+                <option value={DiscountEnum.PERCENTAGE}>Supplier Price</option>
+                <option value={DiscountEnum.MANUAL}>Manual</option>
+              </select>
             </div>
           </div>
         </div>
