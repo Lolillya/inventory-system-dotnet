@@ -3,7 +3,7 @@ import {
   useSelectedInvoiceProduct,
   useSelectedProductInvoiceQuery,
 } from "@/features/invoice/selected-product";
-import { ChevronDownIcon, XIcon } from "@/icons";
+import { ChevronDownIcon, PlusIcon, XIcon } from "@/icons";
 import { InventoryProductModel } from "@/models/inventory.model";
 import { useState } from "react";
 
@@ -64,6 +64,14 @@ export const InvoiceCard = ({ product, onRemove }: InvoiceCardProp) => {
         </div>
       </div>
 
+      <div className="bg-custom-bg-white p-2 w-full rounded-lg flex items-center justify-between">
+        <span>Add Batch</span>
+        <div className="bg-white p-1 rounded-lg">
+          <PlusIcon />
+        </div>
+
+      </div>
+
       <Separator orientation="horizontal" />
 
       <div className="flex flex-col gap-3">
@@ -77,8 +85,7 @@ export const InvoiceCard = ({ product, onRemove }: InvoiceCardProp) => {
           <div className="flex flex-col gap-2">
             <div className="flex">
               <input
-                placeholder="20"
-                className="drop-shadow-none rounded-r-none bg-gray-bg w-full"
+                className="drop-shadow-none rounded-r-none bg-custom-gray w-full"
                 onChange={(e) =>
                   updateInvoiceQuantityByKey(
                     product.product.product_ID,
@@ -87,7 +94,7 @@ export const InvoiceCard = ({ product, onRemove }: InvoiceCardProp) => {
                   )
                 }
               />
-              <select className="drop-shadow-none rounded-l-none border-l-black border-l bg-gray-bg w-full rounded-r-lg pl-3">
+              <select className="drop-shadow-none rounded-l-none border-l-gray border-l bg-custom-gray w-full rounded-r-lg pl-6">
                 <option value={"Boxes"}>Boxes</option>
                 <option value={"Pieces"}>Pieces</option>
               </select>
@@ -124,8 +131,7 @@ export const InvoiceCard = ({ product, onRemove }: InvoiceCardProp) => {
           <div className="flex flex-col gap-2">
             <div className="flex">
               <input
-                placeholder="20"
-                className="drop-shadow-none rounded-r-none bg-gray-bg"
+                className="drop-shadow-none rounded-r-none bg-custom-gray w-full"
                 onChange={(e) =>
                   updateInvoiceUnitPriceByKey(
                     product.product.product_ID,
@@ -135,8 +141,7 @@ export const InvoiceCard = ({ product, onRemove }: InvoiceCardProp) => {
                 }
               />
               <input
-                placeholder="boxes"
-                className="drop-shadow-none rounded-l-none border-l-black border-l bg-gray-bg"
+                className="drop-shadow-none rounded-l-none border-l-gray border-l bg-custom-gray w-full"
               />
             </div>
           </div>
@@ -147,8 +152,7 @@ export const InvoiceCard = ({ product, onRemove }: InvoiceCardProp) => {
           <div className="flex flex-col gap-2">
             <div className="flex">
               <input
-                placeholder="20"
-                className="drop-shadow-none rounded-r-none bg-gray-bg w-full"
+                className="drop-shadow-none rounded-r-none bg-custom-gray w-full"
                 onChange={(e) =>
                   updateInvoiceDiscountByKey(
                     product.product.product_ID,
@@ -158,7 +162,7 @@ export const InvoiceCard = ({ product, onRemove }: InvoiceCardProp) => {
                 }
               />
               <select
-                className="drop-shadow-none rounded-l-none border-l-black border-l bg-gray-bg w-full rounded-r-lg pl-3"
+                className="drop-shadow-none rounded-l-none border-l-gray border-l bg-custom-gray w-full rounded-r-lg pl-6"
                 value={discount}
                 onChange={(e) => setDiscount(e.target.value as DiscountEnum)}
               >
@@ -174,10 +178,9 @@ export const InvoiceCard = ({ product, onRemove }: InvoiceCardProp) => {
         <div className="flex gap-2 items-center">
           <span>total:</span>
           <input
-            className="shadow-none drop-shadow-none bg-custom-gray"
+            className="shadow-none drop-shadow-none bg-custom-gray w-full"
             value={calculateTotal().toString()}
           />
-          {/* <span>P 0000.00</span> */}
         </div>
       </div>
     </div>
