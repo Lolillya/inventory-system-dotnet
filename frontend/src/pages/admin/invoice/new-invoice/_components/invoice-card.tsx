@@ -5,11 +5,17 @@ import {
 } from "@/features/invoice/selected-product";
 import { ChevronDownIcon, XIcon } from "@/icons";
 import { InventoryProductModel } from "@/models/inventory.model";
+import { useState } from "react";
 
 interface InvoiceCardProp {
   onClick?: () => void;
   product: InventoryProductModel;
   onRemove?: () => void;
+}
+
+enum DiscountEnum {
+  MANUAL = "",
+  PERCENTAGE = "%",
 }
 
 export const InvoiceCard = ({ product, onRemove }: InvoiceCardProp) => {
@@ -19,6 +25,25 @@ export const InvoiceCard = ({ product, onRemove }: InvoiceCardProp) => {
     updateInvoiceDiscountByKey,
   } = useSelectedInvoiceProduct();
   const { data: selelctedInvoice } = useSelectedProductInvoiceQuery();
+
+  const [discount, setDiscount] = useState<DiscountEnum>(DiscountEnum.MANUAL);
+
+  const calculateTotal = () => {
+    const item =
+      selelctedInvoice && selelctedInvoice.length > 0
+        ? selelctedInvoice[0].item
+        : null;
+    if (!item) return "";
+
+    const subtotal = item.unit_quantity * item.unit_price;
+
+    if (discount === DiscountEnum.MANUAL) return subtotal - item.discount;
+
+    if (discount === DiscountEnum.PERCENTAGE)
+      return subtotal - (subtotal * item.discount) / 100;
+
+    return subtotal;
+  };
 
   // console.log(selelctedInvoice);
 
@@ -62,10 +87,7 @@ export const InvoiceCard = ({ product, onRemove }: InvoiceCardProp) => {
                   )
                 }
               />
-              <select
-                className="drop-shadow-none rounded-l-none border-l-black border-l bg-gray-bg w-full rounded-r-lg pl-3"
-                value={"Select unit"}
-              >
+              <select className="drop-shadow-none rounded-l-none border-l-black border-l bg-gray-bg w-full rounded-r-lg pl-3">
                 <option value={"Boxes"}>Boxes</option>
                 <option value={"Pieces"}>Pieces</option>
               </select>
@@ -126,7 +148,7 @@ export const InvoiceCard = ({ product, onRemove }: InvoiceCardProp) => {
             <div className="flex">
               <input
                 placeholder="20"
-                className="drop-shadow-none rounded-r-none bg-gray-bg"
+                className="drop-shadow-none rounded-r-none bg-gray-bg w-full"
                 onChange={(e) =>
                   updateInvoiceDiscountByKey(
                     product.product.product_ID,
@@ -135,19 +157,27 @@ export const InvoiceCard = ({ product, onRemove }: InvoiceCardProp) => {
                   )
                 }
               />
-              <input
-                placeholder="boxes"
-                className="drop-shadow-none rounded-l-none border-l-black border-l bg-gray-bg"
-              />
+              <select
+                className="drop-shadow-none rounded-l-none border-l-black border-l bg-gray-bg w-full rounded-r-lg pl-3"
+                value={discount}
+                onChange={(e) => setDiscount(e.target.value as DiscountEnum)}
+              >
+                <option value={DiscountEnum.PERCENTAGE}>Percentage (%)</option>
+                <option value={DiscountEnum.MANUAL}>Manual</option>
+              </select>
             </div>
           </div>
         </div>
 
         <Separator orientation="horizontal" />
 
-        <div className="flex gap-2">
+        <div className="flex gap-2 items-center">
           <span>total:</span>
-          <span>P 0000.00</span>
+          <input
+            className="shadow-none drop-shadow-none bg-custom-gray"
+            value={calculateTotal().toString()}
+          />
+          {/* <span>P 0000.00</span> */}
         </div>
       </div>
     </div>
