@@ -8,6 +8,7 @@ import { LeftArrowIcon, SearchIcon } from "@/icons";
 import { useState } from "react";
 import { ProductCard } from "../../../../components/product-card";
 import { CreateRestockModal } from "./_components/restock-modal";
+import RestockCard from "./_components/restock-card";
 
 const NewRestockPage = () => {
   // GLOBAL STATES
@@ -44,19 +45,13 @@ const NewRestockPage = () => {
           <div className="flex gap-5 overflow-y-hidden flex-1">
             {/* LEFT */}
             <div className="w-full flex">
-              {selectedInvoices.length === 0 ? (
+              {/* {selectedInvoices.length === 0 ? (
                 <NoSelectedState />
-              ) : (
-                <div className="flex gap-2 flex-wrap h-full overflow-y-auto flex-1 pr-2">
-                  {/* {selectedInvoices.map((product, index) => (
-                    <InvoiceCard
-                      key={`${product.item.invoice.product.product_ID}-${product.item.invoice.variant.variantName}-${index}`}
-                      product={product.item.invoice}
-                      onRemove={() => removeProduct(product)}
-                    />
-                  ))} */}
-                </div>
-              )}
+              ) : ( */}
+              <div className="flex gap-2 flex-wrap h-full overflow-y-auto flex-1 pr-2">
+                <RestockCard />
+              </div>
+              {/* )} */}
             </div>
 
             {/* RIGHT */}
