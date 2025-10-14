@@ -1,7 +1,7 @@
 import { NoSelectedState } from "@/components/no-selected-state";
 import { UseInventoryQuery } from "@/features/inventory/get-inventory.query";
 import { LeftArrowIcon, SearchIcon } from "@/icons";
-import { ProductCard } from "./_components/product-card";
+import { ProductCard } from "../../../../components/product-card";
 import { InventoryProductModel } from "@/models/inventory.model";
 import {
   useSelectedProductInvoiceQuery,

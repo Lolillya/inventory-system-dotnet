@@ -6,8 +6,8 @@ import {
 } from "@/features/invoice/selected-product";
 import { LeftArrowIcon, SearchIcon } from "@/icons";
 import { useState } from "react";
-import { CreateInvoiceModal } from "../../invoice/new-invoice/_components/invoice-modal";
-import { ProductCard } from "../../invoice/new-invoice/_components/product-card";
+import { ProductCard } from "../../../../components/product-card";
+import { CreateRestockModal } from "./_components/restock-modal";
 
 const NewRestockPage = () => {
   // GLOBAL STATES
@@ -22,13 +22,13 @@ const NewRestockPage = () => {
   // FETCHING DATA ERROR STATE
   if (error) return <div>Error...</div>;
 
-  const createInvoice = () => {
+  const createRestock = () => {
     setIsModalOpen((prev) => !prev);
   };
 
   return (
     <section>
-      {isModalOpen && <CreateInvoiceModal createInvoice={createInvoice} />}
+      {isModalOpen && <CreateRestockModal createRestock={createRestock} />}
       <div className="flex flex-col min-h-0 flex-1 gap-5">
         <div className="flex flex-col gap-10">
           <div className="flex gap-3 border-b pb-5 items-center">
@@ -84,7 +84,7 @@ const NewRestockPage = () => {
 
               <div className="flex gap-5 justify-between">
                 <button>clear</button>
-                <button>create restock</button>
+                <button onClick={createRestock}>create restock</button>
               </div>
             </div>
           </div>
