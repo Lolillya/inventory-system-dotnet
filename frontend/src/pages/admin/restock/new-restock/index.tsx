@@ -1,19 +1,23 @@
 import { NoSelectedState } from "@/components/no-selected-state";
 import { UseInventoryQuery } from "@/features/inventory/get-inventory.query";
-import {
-  useSelectedProductInvoiceQuery,
-  useSelectedInvoiceProduct,
-} from "@/features/invoice/selected-product";
 import { LeftArrowIcon, SearchIcon } from "@/icons";
 import { useState } from "react";
 import { ProductCard } from "../../../../components/product-card";
 import { CreateRestockModal } from "./_components/restock-modal";
 import RestockCard from "./_components/restock-card";
+import { InventoryProductModel } from "@/models/inventory.model";
+import { RestockModel } from "@/models/restock.model";
+import { units } from "@/models/enum";
+import {
+  useSelectedRestock,
+  useSelectedRestockProduct,
+} from "@/features/restock/selected-restock";
 
 const NewRestockPage = () => {
   // GLOBAL STATES
   const { data: inventoryData, isLoading, error } = UseInventoryQuery();
-  const { data: selectedInvoices = [] } = useSelectedProductInvoiceQuery();
+  const { data: selectedProduct } = useSelectedRestockProduct();
+  const { addProduct, removeProduct } = useSelectedRestock();
 
   // LOCAL STATES
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -25,6 +29,21 @@ const NewRestockPage = () => {
 
   const createRestock = () => {
     setIsModalOpen((prev) => !prev);
+  };
+
+  const handleClick = (data: InventoryProductModel) => {
+    const restock: RestockModel = {
+      restock: {
+        items: data,
+        unit: units.NONE,
+        unit_quantity: 0,
+        unit_price: 0,
+        discount: 0,
+        total: 0,
+      },
+    };
+
+    addProduct(restock);
   };
 
   return (
@@ -45,13 +64,19 @@ const NewRestockPage = () => {
           <div className="flex gap-5 overflow-y-hidden flex-1">
             {/* LEFT */}
             <div className="w-full flex">
-              {/* {selectedInvoices.length === 0 ? (
+              {!selectedProduct || selectedProduct.length === 0 ? (
                 <NoSelectedState />
-              ) : ( */}
-              <div className="flex gap-2 flex-wrap h-full overflow-y-auto flex-1 pr-2">
-                <RestockCard />
-              </div>
-              {/* )} */}
+              ) : (
+                <div className="flex gap-2 flex-wrap h-full overflow-y-auto flex-1 pr-2">
+                  {selectedProduct.map((item, i) => (
+                    <RestockCard
+                      key={i}
+                      product={item.restock.items}
+                      onRemove={() => removeProduct(item)}
+                    />
+                  ))}
+                </div>
+              )}
             </div>
 
             {/* RIGHT */}
@@ -70,7 +95,7 @@ const NewRestockPage = () => {
                   {inventoryData?.map((data, i) => (
                     <ProductCard
                       product={data}
-                      //   onClick={() => handleClick(data)}
+                      onClick={() => handleClick(data)}
                       key={i}
                     />
                   ))}

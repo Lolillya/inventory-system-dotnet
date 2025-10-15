@@ -10,7 +10,8 @@ import {
 import { InvoiceCard } from "./_components/invoice-card";
 import { useState } from "react";
 import { CreateInvoiceModal } from "./_components/invoice-modal";
-import { InvoiceProductModel, units } from "@/models/invoice.model";
+import { InvoiceProductModel } from "@/models/invoice.model";
+import { units } from "@/models/enum";
 
 const NewInvoicePage = () => {
   // GLOBAL STATES

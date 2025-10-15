@@ -1,19 +1,29 @@
 import { Separator } from "@/components/separator";
 import { LeftArrowIcon, PlusIcon, RightArrowIcon, XIcon } from "@/icons";
+import { InventoryProductModel } from "@/models/inventory.model";
 
-const RestockCard = () => {
+interface RestockCardProp {
+  onClick?: () => void;
+  product: InventoryProductModel;
+  onRemove?: () => void;
+}
+
+const RestockCard = ({ product, onRemove }: RestockCardProp) => {
   return (
     <div className="p-5 border shadow-lg rounded-lg h-fit w-full max-w-[30rem] text-xs">
       <div className="flex gap-2 items-center text-xs justify-between">
         <div>
-          <span>Item</span>
+          <span>{product.product.productName}</span>
           <span>-</span>
-          <span>Brand</span>
+          <span>{product.brand.brandName}</span>
           <span>-</span>
-          <span>Variant</span>
+          <span>{product.variant.variantName}</span>
         </div>
 
-        <div className="cursor-pointer hover:bg-gray-200 rounded p-1">
+        <div
+          className="cursor-pointer hover:bg-gray-200 rounded p-1"
+          onClick={onRemove}
+        >
           <XIcon />
         </div>
       </div>
