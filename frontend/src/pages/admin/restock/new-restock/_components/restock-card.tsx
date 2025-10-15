@@ -1,6 +1,9 @@
 import { Separator } from "@/components/separator";
+import { useSelectedRestock } from "@/features/restock/selected-restock";
 import { LeftArrowIcon, PlusIcon, RightArrowIcon, XIcon } from "@/icons";
+import { units } from "@/models/enum";
 import { InventoryProductModel } from "@/models/inventory.model";
+import { useState } from "react";
 
 interface RestockCardProp {
   onClick?: () => void;
@@ -9,6 +12,13 @@ interface RestockCardProp {
 }
 
 const RestockCard = ({ product, onRemove }: RestockCardProp) => {
+  const {
+    UPDATE_RESTOCK_QUANTITY,
+    UPDATE_RESTOCK_UNIT_PRICE,
+    UPDATE_RESTOCK_UNIT,
+  } = useSelectedRestock();
+
+  const [selectedUnit, setSelectedUnit] = useState<units>(units.NONE);
   return (
     <div className="p-5 border shadow-lg rounded-lg h-fit w-full max-w-[30rem] text-xs">
       <div className="flex gap-2 items-center text-xs justify-between">
@@ -36,6 +46,13 @@ const RestockCard = ({ product, onRemove }: RestockCardProp) => {
           <input
             placeholder="qty"
             className="w-full drop-shadow-none bg-custom-gray"
+            onChange={(e) =>
+              UPDATE_RESTOCK_QUANTITY(
+                product.product.product_ID,
+                Number(e.target.value),
+                product.variant.variantName
+              )
+            }
           />
         </div>
 
@@ -44,14 +61,31 @@ const RestockCard = ({ product, onRemove }: RestockCardProp) => {
           <input
             placeholder="0.00"
             className="w-full drop-shadow-none bg-custom-gray"
+            onChange={(e) =>
+              UPDATE_RESTOCK_UNIT_PRICE(
+                product.product.product_ID,
+                Number(e.target.value),
+                product.variant.variantName
+              )
+            }
           />
         </div>
 
         <div className="flex flex-col gap-1">
           <label>unit</label>
-          <select className="rounded-lg w-full p-3 text-sm drop-shadow-none bg-custom-bg-white">
-            <option value={"Boxes"}>Boxes</option>
-            <option value={"Pieces"}>Pieces</option>
+          <select
+            className="rounded-lg w-full p-3 text-sm drop-shadow-none bg-custom-bg-white"
+            value={units.NONE}
+            onChange={(e) =>
+              UPDATE_RESTOCK_UNIT(
+                product.product.product_ID,
+                e.target.value as units,
+                product.variant.variantName
+              )
+            }
+          >
+            <option value={units.BOXES}>Boxes</option>
+            <option value={units.PACKS}>Packs</option>
           </select>
         </div>
       </div>

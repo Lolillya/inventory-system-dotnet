@@ -19,6 +19,8 @@ const NewRestockPage = () => {
   const { data: selectedProduct } = useSelectedRestockProduct();
   const { addProduct, removeProduct } = useSelectedRestock();
 
+  console.log(selectedProduct);
+
   // LOCAL STATES
   const [isModalOpen, setIsModalOpen] = useState(false);
 
