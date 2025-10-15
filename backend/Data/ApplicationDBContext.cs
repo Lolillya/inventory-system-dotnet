@@ -9,6 +9,7 @@ using Microsoft.EntityFrameworkCore;
 using backend.Data;
 using backend.Models.Inventory;
 using backend.Models.Invoice;
+using backend.Models.restock;
 
 namespace backend.Data
 {
@@ -24,8 +25,10 @@ namespace backend.Data
         public DbSet<Category> Categories { get; set; }
         public DbSet<Product> Products { get; set; }
         public DbSet<Variant> Variants { get; set; }
-        public DbSet<backend.Models.Inventory.Inventory> Inventories { get; set; }
-        public DbSet<backend.Models.Invoice.Invoice> Invoice { get; set; }
+        public DbSet<Inventory> Inventories { get; set; }
+        public DbSet<Invoice> Invoice { get; set; }
+        public DbSet<Restock> Restocks { get; set; }
+        public DbSet<RestockBatch> RestocksBatch { get; set; }
 
         protected override void OnModelCreating(ModelBuilder builder)
         {
@@ -48,7 +51,7 @@ namespace backend.Data
             Seeders.VariantInventory.SeedVariantData(builder);
             Seeders.SeedInvoice.SeedInvoiceData(builder);
 
-            builder.Entity<backend.Models.Invoice.Invoice>(entity =>
+            builder.Entity<Invoice>(entity =>
             {
                 entity.ToTable("Invoice"); // optional, matches your table name
 
@@ -62,6 +65,22 @@ namespace backend.Data
                     .HasForeignKey(i => i.Invoice_Clerk)
                     .OnDelete(DeleteBehavior.NoAction); // or .Restrict
             });
+
+            builder.Entity<Restock>(entity =>
+            {
+                entity.ToTable("Restock");
+
+                entity.HasOne(r => r.LineItem)
+                    .WithMany()
+                    .HasForeignKey(r => r.LineItem_ID)
+                    .OnDelete(DeleteBehavior.NoAction);
+
+                entity.HasOne(r => r.Clerk)
+                    .WithMany()
+                    .HasForeignKey(r => r.Restock_Clerk)
+                    .OnDelete(DeleteBehavior.NoAction);
+                    
+            }); 
 
         }
     }
