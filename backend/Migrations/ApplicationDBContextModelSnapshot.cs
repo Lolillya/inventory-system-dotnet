@@ -1108,6 +1108,34 @@ namespace backend.Migrations
                         });
                 });
 
+            modelBuilder.Entity("backend.Models.LineItems.LineItem", b =>
+                {
+                    b.Property<int>("LineItem_ID")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("LineItem_ID"));
+
+                    b.Property<int>("Product_ID")
+                        .HasColumnType("int");
+
+                    b.Property<int>("Quantity")
+                        .HasColumnType("int");
+
+                    b.Property<decimal>("SubTotal")
+                        .HasColumnType("decimal(18,2)");
+
+                    b.Property<string>("Unit")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("LineItem_ID");
+
+                    b.HasIndex("Product_ID");
+
+                    b.ToTable("LineItem");
+                });
+
             modelBuilder.Entity("backend.Models.PersonalDetails", b =>
                 {
                     b.Property<string>("Id")
@@ -1590,6 +1618,68 @@ namespace backend.Migrations
                         });
                 });
 
+            modelBuilder.Entity("backend.Models.restock.Restock", b =>
+                {
+                    b.Property<int>("Restock_ID")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Restock_ID"));
+
+                    b.Property<int>("Batch_ID")
+                        .HasColumnType("int");
+
+                    b.Property<int>("LineItem_ID")
+                        .HasColumnType("int");
+
+                    b.Property<string>("Notes")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Restock_Clerk")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(450)");
+
+                    b.HasKey("Restock_ID");
+
+                    b.HasIndex("LineItem_ID");
+
+                    b.HasIndex("Restock_Clerk");
+
+                    b.ToTable("Restock", (string)null);
+                });
+
+            modelBuilder.Entity("backend.Models.restock.RestockBatch", b =>
+                {
+                    b.Property<int>("Batch_ID")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Batch_ID"));
+
+                    b.Property<int>("Batch_Number")
+                        .HasColumnType("int");
+
+                    b.Property<DateTime>("CreatedAt")
+                        .HasColumnType("datetime2");
+
+                    b.Property<int>("Restock_ID")
+                        .HasColumnType("int");
+
+                    b.Property<string>("Supplier_ID")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<DateTime>("UpdatedAt")
+                        .HasColumnType("datetime2");
+
+                    b.HasKey("Batch_ID");
+
+                    b.HasIndex("Supplier_ID");
+
+                    b.ToTable("RestocksBatch");
+                });
+
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
                 {
                     b.HasOne("Microsoft.AspNetCore.Identity.IdentityRole", null)
@@ -1658,6 +1748,47 @@ namespace backend.Migrations
                     b.Navigation("Clerk");
 
                     b.Navigation("Customer");
+                });
+
+            modelBuilder.Entity("backend.Models.LineItems.LineItem", b =>
+                {
+                    b.HasOne("backend.Models.Inventory.Product", "Product")
+                        .WithMany()
+                        .HasForeignKey("Product_ID")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Product");
+                });
+
+            modelBuilder.Entity("backend.Models.restock.Restock", b =>
+                {
+                    b.HasOne("backend.Models.LineItems.LineItem", "LineItem")
+                        .WithMany()
+                        .HasForeignKey("LineItem_ID")
+                        .OnDelete(DeleteBehavior.NoAction)
+                        .IsRequired();
+
+                    b.HasOne("backend.Models.PersonalDetails", "Clerk")
+                        .WithMany()
+                        .HasForeignKey("Restock_Clerk")
+                        .OnDelete(DeleteBehavior.NoAction)
+                        .IsRequired();
+
+                    b.Navigation("Clerk");
+
+                    b.Navigation("LineItem");
+                });
+
+            modelBuilder.Entity("backend.Models.restock.RestockBatch", b =>
+                {
+                    b.HasOne("backend.Models.PersonalDetails", "Supplier")
+                        .WithMany()
+                        .HasForeignKey("Supplier_ID")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Supplier");
                 });
 #pragma warning restore 612, 618
         }
