@@ -15,7 +15,7 @@ namespace backend.Models.restock
 
         // FKs
         public int Restock_ID { get; set; }
-        public int Supplier_ID { get; set; }
+        public string Supplier_ID { get; set; } = null!;
 
         [ForeignKey(nameof(Supplier_ID))]
         public PersonalDetails Supplier { get; set; } = null!;
