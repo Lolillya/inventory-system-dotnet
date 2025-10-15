@@ -8,7 +8,7 @@ using backend.Models.Inventory;
 
 namespace backend.Models.LineItems
 {
-    public class LineItems
+    public class LineItem
     {
         [Key]
         public int LineItem_ID { get; set; }
