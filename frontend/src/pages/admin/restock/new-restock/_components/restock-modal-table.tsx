@@ -1,8 +1,7 @@
-import { Separator } from "@/components/separator";
-import { useSelectedProductInvoiceQuery } from "@/features/invoice/selected-product";
+import { useSelectedRestockProduct } from "@/features/restock/selected-restock";
 
 export const RestockTable = () => {
-  const { data: selectedInvoices = [] } = useSelectedProductInvoiceQuery();
+  const { data: restockData } = useSelectedRestockProduct();
   return (
     <div className="flex-1 flex flex-col overflow-hidden gap-2">
       {/* TABLE DATA HEADERS */}
@@ -17,13 +16,13 @@ export const RestockTable = () => {
 
       {/* TABLE DATA BODY */}
       <div className="overflow-auto flex flex-col h-full">
-        {selectedInvoices.map((item, i) => (
+        {restockData?.map((item, i) => (
           <div
             className={`py-3 px-5 flex justify-between gap-2 rounded-lg items-center ${i % 2 != 0 && "bg-custom-gray"}`}
             key={i}
           >
             <span className="text-left w-full">
-              {item.item.invoice.product.productName}
+              {item.restock.items.product.productName}
             </span>
             <span className="text-left w-full">99</span>
             <span className="text-left w-full">Boxed</span>

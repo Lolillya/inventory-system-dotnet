@@ -1,5 +1,8 @@
 import { XIcon } from "@/icons";
 import { RestockTable } from "./restock-modal-table";
+import { useSuppliersQuery } from "@/features/suppliers/supplier-get-all.query";
+import { useEffect, useRef, useState } from "react";
+import { SupplierPicker } from "./supplier-picker";
 
 interface CreateRestockModalProps {
   createRestock: () => void;
@@ -8,6 +11,8 @@ interface CreateRestockModalProps {
 export const CreateRestockModal = ({
   createRestock,
 }: CreateRestockModalProps) => {
+  const { data: suppliersData } = useSuppliersQuery();
+  console.log(suppliersData);
   return (
     <div className="absolute bg-black/40 w-full h-full top-0 left-0 flex justify-center items-center z-50">
       <div className="w-3/6 h-4/5 bg-white px-20 py-10 rounded-lg border shadow-lg">
@@ -26,12 +31,7 @@ export const CreateRestockModal = ({
           </div>
 
           {/* SEARCH CONTAINER */}
-          <div className="flex flex-col w-full gap-2">
-            <label className="text-vesper-gray">Customer & Term</label>
-            <div className="flex w-full">
-              <input className="w-full" placeholder="Customer Name" />
-            </div>
-          </div>
+          <SupplierPicker suppliersData={suppliersData} />
 
           {/* TABLE CONTAINER */}
           <RestockTable />
