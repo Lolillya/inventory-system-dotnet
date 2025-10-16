@@ -57,7 +57,7 @@ namespace backend.Controllers.Auth
                     FirstName = user.FirstName,
                     LastName = user.LastName,
                     PhoneNumber = user.PhoneNumber,
-                    RoleId = role != null ? role.NormalizedName : string.Empty,
+                    Role = role != null ? role.NormalizedName : string.Empty,
                     User_ID = user.Id
                 }
             );

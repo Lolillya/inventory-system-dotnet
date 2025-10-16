@@ -52,7 +52,10 @@ namespace backend.Controllers.Auth
 
                 if (createdUser.Succeeded)
                 {
-                    var roleResult = await _userManager.AddToRoleAsync(appUser, "User");
+                    if (string.IsNullOrEmpty(role.Name))
+                        return BadRequest("Invalid role name");
+
+                    var roleResult = await _userManager.AddToRoleAsync(appUser, role.Name);
                     if (roleResult.Succeeded)
                         return Ok(
                             new NewUserDto
@@ -65,7 +68,8 @@ namespace backend.Controllers.Auth
                                 FirstName = appUser.FirstName,
                                 LastName = appUser.LastName,
                                 PhoneNumber = appUser.PhoneNumber,
-                                RoleId = role.Id,
+                                Role = role.NormalizedName,
+                                User_ID = appUser.Id
                             }
                         );
                     else
@@ -80,4 +84,4 @@ namespace backend.Controllers.Auth
             }
         }
     }
-} 
+}
