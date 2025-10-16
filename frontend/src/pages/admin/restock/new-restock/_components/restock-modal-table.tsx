@@ -10,7 +10,6 @@ export const RestockTable = () => {
         <label className="text-left w-full">Quantity</label>
         <label className="text-left w-full">Unit</label>
         <label className="text-right w-full">Unit Price</label>
-        <label className="text-right w-full">Discount</label>
         <label className="text-right w-full">Subtotal</label>
       </div>
 
@@ -22,13 +21,25 @@ export const RestockTable = () => {
             key={i}
           >
             <span className="text-left w-full">
-              {item.restock.items.product.productName}
+              <div>
+                <span>{item.restock.items.product.productName}</span>
+                <span>-</span>
+                <span>{item.restock.items.brand.brandName}</span>
+                <span>-</span>
+                <span>{item.restock.items.variant.variantName}</span>
+              </div>
             </span>
-            <span className="text-left w-full">99</span>
-            <span className="text-left w-full">Boxed</span>
-            <span className="text-right w-full">P 0000.00</span>
-            <span className="text-right w-full">0%</span>
-            <span className="text-right w-full">P 0000.00</span>
+            <span className="text-left w-full">
+              {item.restock.unit_quantity}
+            </span>
+            <span className="text-left w-full">{item.restock.unit}</span>
+            <span className="text-right w-full">
+              P {item.restock.unit_price}
+            </span>
+
+            <span className="text-right w-full">
+              P {item.restock.unit_price * item.restock.unit_quantity}
+            </span>
           </div>
         ))}
       </div>
@@ -40,11 +51,6 @@ export const RestockTable = () => {
 
       <div className="flex justify-between">
         <div className="flex flex-col">
-          <div className="flex gap-2  text-sm tracking-wider">
-            <span className="text-vesper-gray">P 0000.00</span>
-            <label className="text-vesper-gray ">Discount</label>
-          </div>
-
           <div className="flex gap-2 font-bold tracking-wider">
             <span>TOTAL: </span>
             <label>P 0000.00</label>
