@@ -40,7 +40,6 @@ const NewRestockPage = () => {
         unit: units.NONE,
         unit_quantity: 0,
         unit_price: 0,
-        discount: 0,
         total: 0,
       },
     };
