@@ -1,12 +1,16 @@
-import { CreateRestock } from "@/features/restock/create-restock.service";
+import { useAuth } from "@/context/use-auth";
+import { createRestock } from "@/features/restock/create-restock.service";
 import { useSelectedRestockProduct } from "@/features/restock/selected-restock";
+import { useSelectedRestockSupplier } from "@/features/restock/selected-supplier";
 
 export const RestockTable = () => {
   const { data: restockData } = useSelectedRestockProduct();
+  const { data: supplier } = useSelectedRestockSupplier();
+  const { user } = useAuth();
 
   const handleCreateRestock = () => {
     if (!restockData) console.log("Add Items for restock!");
-    else CreateRestock(restockData);
+    else createRestock(restockData, supplier?.id, user?.user_ID);
   };
   return (
     <div className="flex-1 flex flex-col overflow-hidden gap-2">

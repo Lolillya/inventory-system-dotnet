@@ -6,14 +6,15 @@ import { useAuth } from "@/context/use-auth";
 
 import axios from "axios";
 
-export const CreateRestock = async (payload: RestockModel[]) => {
-  const { data: supplier } = useSelectedRestockSupplier();
-  const { user } = useAuth();
+// Pure function that does not use hooks. Accepts supplierId and userId as arguments.
+export const createRestock = async (
+  payload: RestockModel[],
+  supplierId?: string | number,
+  userId?: string | number
+) => {
   console.log("payload: ", payload);
-  console.log("current user: ", user);
+  console.log("supplierId: ", supplierId, "userId:", userId);
   try {
-    // Transform frontend RestockModel[] to backend RestockDTO[] shape
-    // backend expects: { LineItem: { Product_ID, Unit, SubTotal, Quantity }, Batch: { Batch_Number, Supplier_ID }, Restock_Clerk, Notes }
     const dtos = payload.map((p) => ({
       LineItem: {
         Product_ID: p.restock.items.product.product_ID,
@@ -23,9 +24,9 @@ export const CreateRestock = async (payload: RestockModel[]) => {
       },
       Batch: {
         Batch_Number: 1,
-        Supplier_ID: supplier?.id,
+        Supplier_ID: supplierId,
       },
-      Restock_Clerk: "",
+      Restock_Clerk: userId,
       Notes: "",
     }));
 
@@ -38,4 +39,16 @@ export const CreateRestock = async (payload: RestockModel[]) => {
   } catch (e) {
     handleError(e);
   }
+};
+
+// Hook wrapper that binds hooks and returns a safe caller for components
+export const useCreateRestock = () => {
+  const { data: supplier } = useSelectedRestockSupplier();
+  const { user } = useAuth();
+
+  const call = async (payload: RestockModel[]) => {
+    return createRestock(payload, supplier?.id, user?.user_ID);
+  };
+
+  return { createRestock: call };
 };
