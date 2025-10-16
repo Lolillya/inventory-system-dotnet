@@ -40,18 +40,8 @@ const NewRestockPage = () => {
         unit: units.NONE,
         unit_quantity: 0,
         unit_price: 0,
+        discount: 0,
         total: 0,
-        selected_supplier: {
-          id: "",
-          companyName: "",
-          firstName: "",
-          lastName: "",
-          username: "",
-          email: "",
-          phoneNumber: "",
-          notes: "",
-          role: "",
-        },
       },
     };
 

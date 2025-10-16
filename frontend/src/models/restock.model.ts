@@ -1,6 +1,5 @@
 import { units } from "./enum";
 import { InventoryProductModel } from "./inventory.model";
-import { UserClientModel } from "./user-client.model";
 
 export type RestockModel = {
   restock: {
@@ -8,7 +7,7 @@ export type RestockModel = {
     unit: units;
     unit_quantity: number;
     unit_price: number;
+    discount: number;
     total: number;
-    selected_supplier: UserClientModel;
   };
 };

@@ -1,3 +1,7 @@
+import {
+  updateSelectedSupplier,
+  useSelectedRestockSupplier,
+} from "@/features/restock/selected-supplier";
 import { useState, useRef, useEffect } from "react";
 
 export const SupplierPicker = ({
@@ -7,8 +11,11 @@ export const SupplierPicker = ({
 }) => {
   const [open, setOpen] = useState(false);
   const [query, setQuery] = useState("");
-  const [selected, setSelected] = useState<string | null>(null);
+
   const ref = useRef<HTMLDivElement | null>(null);
+
+  const { UPDATE_SELECTED_SUPPLIER } = updateSelectedSupplier();
+  const { data: selectedSupplier } = useSelectedRestockSupplier();
 
   useEffect(() => {
     const onClick = (e: MouseEvent) => {
@@ -30,11 +37,10 @@ export const SupplierPicker = ({
         <input
           className="w-full"
           placeholder="Supplier Name"
-          value={selected ?? query}
+          value={selectedSupplier?.companyName}
           onFocus={() => setOpen(true)}
           onChange={(e) => {
             setQuery(e.target.value);
-            setSelected(null);
             setOpen(true);
           }}
         />
@@ -48,9 +54,9 @@ export const SupplierPicker = ({
                 key={index}
                 className="p-2 hover:bg-gray-100 rounded-lg cursor-pointer"
                 onClick={() => {
-                  setSelected(supplier.companyName);
                   setQuery("");
                   setOpen(false);
+                  UPDATE_SELECTED_SUPPLIER(supplier);
                 }}
               >
                 <div className="font-semibold">{supplier.companyName}</div>

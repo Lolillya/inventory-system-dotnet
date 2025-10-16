@@ -93,8 +93,6 @@ export const useSelectedRestock = () => {
     });
   };
 
-  const UPDATE_SELECTED_SUPPLIER = () => {};
-
   const UPDATE_RESTOCK_UNIT = (
     productId: string | number,
     unit: units,
