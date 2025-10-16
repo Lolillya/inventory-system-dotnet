@@ -1,12 +1,17 @@
 import { handleError } from "@/helpers/error-handler.helper";
 import { RestockModel } from "@/models/restock.model";
-import axios from "axios";
 import { api } from "../api/API.service";
+import { useSelectedRestockSupplier } from "./selected-supplier";
+import { useAuth } from "@/context/use-auth";
+
+import axios from "axios";
 
 export const CreateRestock = async (payload: RestockModel[]) => {
+  const { data: supplier } = useSelectedRestockSupplier();
+  const { user } = useAuth();
+  console.log("payload: ", payload);
+  console.log("current user: ", user);
   try {
-    console.log("payload: ", payload);
-
     // Transform frontend RestockModel[] to backend RestockDTO[] shape
     // backend expects: { LineItem: { Product_ID, Unit, SubTotal, Quantity }, Batch: { Batch_Number, Supplier_ID }, Restock_Clerk, Notes }
     const dtos = payload.map((p) => ({
@@ -18,7 +23,7 @@ export const CreateRestock = async (payload: RestockModel[]) => {
       },
       Batch: {
         Batch_Number: 1,
-        Supplier_ID: "",
+        Supplier_ID: supplier?.id,
       },
       Restock_Clerk: "",
       Notes: "",

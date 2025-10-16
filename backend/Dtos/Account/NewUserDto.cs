@@ -18,5 +18,6 @@ namespace api.Dtos.Account
         public string LastName { get; set; }
         public string PhoneNumber { get; set; }
         public string RoleId { get; set; }
+        public string User_ID { get; set; }
     }
 }

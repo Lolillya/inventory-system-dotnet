@@ -29,8 +29,7 @@ export const useSelectedInvoiceProduct = () => {
               product.item.invoice.variant.variantName
         );
         const next = exists ? old : [...old, product];
-        // Log the updated selected invoices
-        console.log("[selected-product] addProduct ->", next);
+
         return next;
       }
     );
@@ -97,10 +96,6 @@ export const useSelectedInvoiceProduct = () => {
         };
         const newArr = [...old];
         newArr[idx] = updatedItem;
-        console.log(
-          "[selected-product] updateInvoiceUnitPriceByKey ->",
-          newArr
-        );
         return newArr;
       }
     );
@@ -134,7 +129,6 @@ export const useSelectedInvoiceProduct = () => {
         };
         const newArr = [...old];
         newArr[idx] = updatedItem;
-        console.log("[selected-product] updateInvoiceDiscountByKey ->", newArr);
         return newArr;
       }
     );
@@ -153,7 +147,6 @@ export const useSelectedInvoiceProduct = () => {
                 product.item.invoice.variant.variantName
             )
         );
-        console.log("[selected-product] removeProduct ->", next);
         return next;
       }
     );
@@ -161,7 +154,6 @@ export const useSelectedInvoiceProduct = () => {
 
   const clearList = () => {
     queryClient.setQueryData<InvoiceProductModel[]>(InvoiceProductKey, []);
-    console.log("[selected-product] clearList -> []");
   };
 
   return {

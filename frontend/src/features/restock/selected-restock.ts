@@ -29,7 +29,7 @@ export const useSelectedRestock = () => {
       );
       const next = exists ? old : [...old, product];
       // Log the updated selected invoices
-      console.log("[selected-product] addProduct ->", next);
+
       return next;
     });
   };
@@ -59,7 +59,7 @@ export const useSelectedRestock = () => {
       };
       const newArr = [...old];
       newArr[idx] = updatedItem;
-      console.log("[selected-product] updateInvoiceUnitPriceByKey ->", newArr);
+
       return newArr;
     });
   };
@@ -133,7 +133,7 @@ export const useSelectedRestock = () => {
               product.restock.items.variant.variantName
           )
       );
-      console.log("[selected-product] removeProduct ->", next);
+
       return next;
     });
   };

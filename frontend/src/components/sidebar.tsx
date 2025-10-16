@@ -14,6 +14,7 @@ import {
 const Sidebar = () => {
   const navigate = useNavigate();
   const { user, logout } = useAuth();
+  console.log(user);
   const sidebarContent = {
     main: {
       dashboard: {
