@@ -1,9 +1,8 @@
 import { Separator } from "@/components/separator";
 import { useSelectedRestock } from "@/features/restock/selected-restock";
-import { LeftArrowIcon, PlusIcon, RightArrowIcon, XIcon } from "@/icons";
+import { PlusIcon, RightArrowIcon, XIcon } from "@/icons";
 import { units } from "@/models/enum";
 import { InventoryProductModel } from "@/models/inventory.model";
-import { useState } from "react";
 
 interface RestockCardProp {
   onClick?: () => void;
@@ -18,7 +17,6 @@ const RestockCard = ({ product, onRemove }: RestockCardProp) => {
     UPDATE_RESTOCK_UNIT,
   } = useSelectedRestock();
 
-  const [selectedUnit, setSelectedUnit] = useState<units>(units.NONE);
   return (
     <div className="p-5 border shadow-lg rounded-lg h-fit w-full max-w-[30rem] text-xs">
       <div className="flex gap-2 items-center text-xs justify-between">
