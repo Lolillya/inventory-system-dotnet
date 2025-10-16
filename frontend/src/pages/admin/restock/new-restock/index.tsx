@@ -41,6 +41,17 @@ const NewRestockPage = () => {
         unit_quantity: 0,
         unit_price: 0,
         total: 0,
+        selected_supplier: {
+          id: "",
+          companyName: "",
+          firstName: "",
+          lastName: "",
+          username: "",
+          email: "",
+          phoneNumber: "",
+          notes: "",
+          role: "",
+        },
       },
     };
 

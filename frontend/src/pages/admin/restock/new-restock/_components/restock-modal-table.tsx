@@ -1,7 +1,13 @@
+import { CreateRestock } from "@/features/restock/create-restock.service";
 import { useSelectedRestockProduct } from "@/features/restock/selected-restock";
 
 export const RestockTable = () => {
   const { data: restockData } = useSelectedRestockProduct();
+
+  const handleCreateRestock = () => {
+    if (!restockData) console.log("Add Items for restock!");
+    else CreateRestock(restockData);
+  };
   return (
     <div className="flex-1 flex flex-col overflow-hidden gap-2">
       {/* TABLE DATA HEADERS */}
@@ -57,7 +63,7 @@ export const RestockTable = () => {
           </div>
         </div>
 
-        <button>Save</button>
+        <button onClick={handleCreateRestock}>Save</button>
       </div>
     </div>
   );
