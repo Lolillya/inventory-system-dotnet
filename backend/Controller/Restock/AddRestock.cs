@@ -38,7 +38,8 @@ namespace backend.Controller.Restocks
                 {
                     Product_ID = dto.LineItem.Product_ID,
                     Unit = dto.LineItem.Unit,
-                    SubTotal = dto.LineItem.SubTotal,
+                    Unit_Price = dto.LineItem.Unit_Price,
+                    Sub_Total = dto.LineItem.Sub_Total,
                     Quantity = dto.LineItem.Quantity,
                 };
 

@@ -20,7 +20,9 @@ namespace backend.Models.LineItems
 
         public string Unit { get; set; } = null!;
         [Column(TypeName = "decimal(18,2)")]
-        public decimal SubTotal { get; set; }
+        public decimal Unit_Price { get; set; }
+        [Column(TypeName = "decimal(18,2)")]
+        public decimal Sub_Total { get; set; }
         public int Quantity { get; set; }
     }
 }

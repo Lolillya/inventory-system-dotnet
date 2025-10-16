@@ -18,16 +18,17 @@ export const createRestock = async (
     const dtos = payload.map((p) => ({
       LineItem: {
         Product_ID: p.restock.items.product.product_ID,
-        Unit: p.restock.items.variant.variantName,
-        SubTotal: p.restock.total,
+        Unit: p.restock.unit,
+        Unit_Price: p.restock.unit_price,
+        Sub_Total: p.restock.unit_price * p.restock.unit_quantity,
         Quantity: p.restock.unit_quantity,
       },
       Batch: {
-        Batch_Number: 1,
+        Batch_Number: 2,
         Supplier_ID: supplierId,
       },
       Restock_Clerk: userId,
-      Notes: "",
+      Notes: "sample note",
     }));
 
     const res = await axios.post(api + "restock/", dtos, {

@@ -9,7 +9,8 @@ namespace backend.Dtos.LineItem
     {
         public int Product_ID { get; set; }
         public string Unit { get; set; } = "";
-        public decimal SubTotal { get; set; }
+        public decimal Unit_Price { get; set; }
+        public decimal Sub_Total { get; set; }
         public int Quantity { get; set; }
     }
 }
