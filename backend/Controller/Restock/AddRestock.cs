@@ -4,9 +4,10 @@ using System.Linq;
 using System.Threading.Tasks;
 using backend.Data;
 using backend.Models.LineItems;
-using LineItemModel = backend.Models.LineItems.LineItem;
-using backend.Models.restock;
+using LineItemModel = backend.Models.LineItems.RestockLineItems;
+using backend.Models.RestockModel;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using backend.Dtos.Restock;
 
 namespace backend.Controller.Restocks
@@ -32,8 +33,22 @@ namespace backend.Controller.Restocks
 
             var createdRestocks = new List<object>();
 
+            // Use a transaction so we don't partially create LineItem/Batch/Restock on error
+            await using var transaction = await _db.Database.BeginTransactionAsync();
+
             foreach (var dto in payload)
             {
+                // Validate restock clerk exists (prevent FK constraint failure)
+                if (!string.IsNullOrEmpty(dto.Restock_Clerk))
+                {
+                    var clerkExists = await _db.Users.AnyAsync(u => u.Id == dto.Restock_Clerk);
+                    if (!clerkExists)
+                    {
+                        // rollback transaction and return a clear error
+                        await transaction.RollbackAsync();
+                        return BadRequest($"Restock clerk with id '{dto.Restock_Clerk}' not found.");
+                    }
+                }
                 var lineItem = new LineItemModel
                 {
                     Product_ID = dto.LineItem.Product_ID,
@@ -59,10 +74,10 @@ namespace backend.Controller.Restocks
 
                 var restock = new Restock
                 {
-                    LineItem_ID = lineItem.LineItem_ID,
                     Batch_ID = batch.Batch_ID,
                     Restock_Clerk = dto.Restock_Clerk,
                     Notes = dto.Notes,
+                    LineItems_Total = dto.LineItem.Quantity * dto.LineItem.Unit_Price
                 };
 
                 _db.Add(restock);
@@ -70,6 +85,9 @@ namespace backend.Controller.Restocks
 
                 createdRestocks.Add(new { restockId = restock.Restock_ID, lineItemId = lineItem.LineItem_ID, batchId = batch.Batch_ID });
             }
+
+            // commit transaction
+            await transaction.CommitAsync();
 
             return Ok(createdRestocks);
         }

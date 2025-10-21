@@ -8,8 +8,9 @@ using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using backend.Data;
 using backend.Models.Inventory;
-using backend.Models.Invoice;
-using backend.Models.restock;
+using backend.Models.InvoiceModel;
+using backend.Models.RestockModel;
+using backend.Models.LineItems;
 
 namespace backend.Data
 {
@@ -27,6 +28,8 @@ namespace backend.Data
         public DbSet<Variant> Variants { get; set; }
         public DbSet<Inventory> Inventories { get; set; }
         public DbSet<Invoice> Invoice { get; set; }
+        public DbSet<InvoiceLineItems> InvoiceLineItems { get; set; }
+        public DbSet<RestockLineItems> RestockLineItems { get; set; }
         public DbSet<Restock> Restocks { get; set; }
         public DbSet<RestockBatch> RestocksBatch { get; set; }
 
@@ -70,17 +73,34 @@ namespace backend.Data
             {
                 entity.ToTable("Restock");
 
-                entity.HasOne(r => r.LineItem)
-                    .WithMany()
-                    .HasForeignKey(r => r.LineItem_ID)
-                    .OnDelete(DeleteBehavior.NoAction);
-
                 entity.HasOne(r => r.Clerk)
                     .WithMany()
                     .HasForeignKey(r => r.Restock_Clerk)
                     .OnDelete(DeleteBehavior.NoAction);
-                    
-            }); 
+
+                // Restock has many LineItems
+                entity.HasMany(r => r.LineItems)
+                    .WithOne(li => li.Restock)
+                    .HasForeignKey("Restock_ID")
+                    .OnDelete(DeleteBehavior.NoAction);
+
+            });
+
+            builder.Entity<RestockLineItems>(entity =>
+            {
+                entity.ToTable("RestockLineItems");
+
+                entity.HasOne(li => li.Product)
+                    .WithMany()
+                    .HasForeignKey(li => li.Product_ID)
+                    .OnDelete(DeleteBehavior.NoAction);
+
+                entity.HasOne(li => li.Restock)
+                    .WithMany()
+                    .HasForeignKey(li => li.Restock_ID)
+                    .OnDelete(DeleteBehavior.NoAction);
+
+            });
 
         }
     }

@@ -12,8 +12,8 @@ using backend.Data;
 namespace backend.Migrations
 {
     [DbContext(typeof(ApplicationDBContext))]
-    [Migration("20251016122745_UpdatedLineItemsModel")]
-    partial class UpdatedLineItemsModel
+    [Migration("20251016140820_UpdatedRestockTables")]
+    partial class UpdatedRestockTables
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -1125,6 +1125,9 @@ namespace backend.Migrations
                     b.Property<int>("Quantity")
                         .HasColumnType("int");
 
+                    b.Property<int>("Restock_ID")
+                        .HasColumnType("int");
+
                     b.Property<decimal>("Sub_Total")
                         .HasColumnType("decimal(18,2)");
 
@@ -1139,7 +1142,9 @@ namespace backend.Migrations
 
                     b.HasIndex("Product_ID");
 
-                    b.ToTable("LineItem");
+                    b.HasIndex("Restock_ID");
+
+                    b.ToTable("LineItem", (string)null);
                 });
 
             modelBuilder.Entity("backend.Models.PersonalDetails", b =>
@@ -1635,8 +1640,8 @@ namespace backend.Migrations
                     b.Property<int>("Batch_ID")
                         .HasColumnType("int");
 
-                    b.Property<int>("LineItem_ID")
-                        .HasColumnType("int");
+                    b.Property<decimal>("LineItems_Total")
+                        .HasColumnType("decimal(18,2)");
 
                     b.Property<string>("Notes")
                         .IsRequired()
@@ -1647,8 +1652,6 @@ namespace backend.Migrations
                         .HasColumnType("nvarchar(450)");
 
                     b.HasKey("Restock_ID");
-
-                    b.HasIndex("LineItem_ID");
 
                     b.HasIndex("Restock_Clerk");
 
@@ -1668,9 +1671,6 @@ namespace backend.Migrations
 
                     b.Property<DateTime>("CreatedAt")
                         .HasColumnType("datetime2");
-
-                    b.Property<int>("Restock_ID")
-                        .HasColumnType("int");
 
                     b.Property<string>("Supplier_ID")
                         .IsRequired()
@@ -1761,20 +1761,22 @@ namespace backend.Migrations
                     b.HasOne("backend.Models.Inventory.Product", "Product")
                         .WithMany()
                         .HasForeignKey("Product_ID")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .OnDelete(DeleteBehavior.NoAction)
+                        .IsRequired();
+
+                    b.HasOne("backend.Models.restock.Restock", "Restock")
+                        .WithMany()
+                        .HasForeignKey("Restock_ID")
+                        .OnDelete(DeleteBehavior.NoAction)
                         .IsRequired();
 
                     b.Navigation("Product");
+
+                    b.Navigation("Restock");
                 });
 
             modelBuilder.Entity("backend.Models.restock.Restock", b =>
                 {
-                    b.HasOne("backend.Models.LineItems.LineItem", "LineItem")
-                        .WithMany()
-                        .HasForeignKey("LineItem_ID")
-                        .OnDelete(DeleteBehavior.NoAction)
-                        .IsRequired();
-
                     b.HasOne("backend.Models.PersonalDetails", "Clerk")
                         .WithMany()
                         .HasForeignKey("Restock_Clerk")
@@ -1782,8 +1784,6 @@ namespace backend.Migrations
                         .IsRequired();
 
                     b.Navigation("Clerk");
-
-                    b.Navigation("LineItem");
                 });
 
             modelBuilder.Entity("backend.Models.restock.RestockBatch", b =>

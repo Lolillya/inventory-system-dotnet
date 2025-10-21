@@ -1,11 +1,7 @@
-using System;
-using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
-using System.Linq;
-using System.Threading.Tasks;
 
-namespace backend.Models.Invoice
+namespace backend.Models.InvoiceModel
 {
     public class Invoice
     {
@@ -33,5 +29,8 @@ namespace backend.Models.Invoice
         public decimal Discount { get; set; }
         public string? Status { get; set; }
         public int Term { get; set; }
+
+        [InverseProperty("Invoices")]
+        public ICollection<LineItems.InvoiceLineItems> LineItems { get; set; } = new List<LineItems.InvoiceLineItems>();
     }
 }
