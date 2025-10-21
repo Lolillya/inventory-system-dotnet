@@ -79,9 +79,10 @@ namespace backend.Data
                     .OnDelete(DeleteBehavior.NoAction);
 
                 // Restock has many LineItems
+                // Use the lambda expression for the FK property to avoid creating duplicate FK columns
                 entity.HasMany(r => r.LineItems)
                     .WithOne(li => li.Restock)
-                    .HasForeignKey("Restock_ID")
+                    .HasForeignKey(li => li.Restock_ID)
                     .OnDelete(DeleteBehavior.NoAction);
 
             });
