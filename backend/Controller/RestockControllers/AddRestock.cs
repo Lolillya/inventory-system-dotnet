@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using backend.Dtos.RestockModel;
 using backend.Models.LineItems;
+using backend.Service;
 
 namespace backend.Controller.RestockControllers
 {
@@ -41,7 +42,9 @@ namespace backend.Controller.RestockControllers
                 }
             }
 
-            // 1) create batch and get id
+            // 1) determine next batch number for supplier and create batch
+            var nextBatchNumber = await GetNextBatchNumberAsync(payload.Batch.Supplier_ID);
+            payload.Batch.Batch_Number = nextBatchNumber;
             var batchId = await CreateBatch(payload);
 
             // 2) create restock referencing batch
@@ -128,6 +131,18 @@ namespace backend.Controller.RestockControllers
             }
 
             return createdLineItems;
+        }
+
+
+        public async Task<int> GetNextBatchNumberAsync(string supplierId)
+        {
+            if (string.IsNullOrEmpty(supplierId)) return 1;
+
+            var max = await _db.RestocksBatch
+                .Where(b => b.Supplier_ID == supplierId)
+                .MaxAsync(b => (int?)b.Batch_Number);
+
+            return (max ?? 0) + 1;
         }
     }
 }
