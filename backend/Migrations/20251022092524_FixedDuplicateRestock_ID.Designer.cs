@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using backend.Data;
 
@@ -11,9 +12,11 @@ using backend.Data;
 namespace backend.Migrations
 {
     [DbContext(typeof(ApplicationDBContext))]
-    partial class ApplicationDBContextModelSnapshot : ModelSnapshot
+    [Migration("20251022092524_FixedDuplicateRestock_ID")]
+    partial class FixedDuplicateRestock_ID
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -1161,6 +1164,9 @@ namespace backend.Migrations
                     b.Property<int>("Restock_ID")
                         .HasColumnType("int");
 
+                    b.Property<int?>("Restock_ID1")
+                        .HasColumnType("int");
+
                     b.Property<decimal>("Sub_Total")
                         .HasColumnType("decimal(18,2)");
 
@@ -1176,6 +1182,8 @@ namespace backend.Migrations
                     b.HasIndex("Product_ID");
 
                     b.HasIndex("Restock_ID");
+
+                    b.HasIndex("Restock_ID1");
 
                     b.ToTable("RestockLineItems", (string)null);
                 });
@@ -1817,10 +1825,14 @@ namespace backend.Migrations
                         .IsRequired();
 
                     b.HasOne("backend.Models.RestockModel.Restock", "Restock")
-                        .WithMany("LineItems")
+                        .WithMany()
                         .HasForeignKey("Restock_ID")
                         .OnDelete(DeleteBehavior.NoAction)
                         .IsRequired();
+
+                    b.HasOne("backend.Models.RestockModel.Restock", null)
+                        .WithMany("LineItems")
+                        .HasForeignKey("Restock_ID1");
 
                     b.Navigation("Product");
 

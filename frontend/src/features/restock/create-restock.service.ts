@@ -12,24 +12,54 @@ export const createRestock = async (
   supplierId?: string | number,
   userId?: string | number
 ) => {
-  console.log("payload: ", payload);
+  // console.log("payload: ", payload);
   console.log("supplierId: ", supplierId, "userId:", userId);
   try {
-    const dtos = payload.map((p) => ({
-      LineItem: {
-        Product_ID: p.restock.items.product.product_ID,
-        Unit: p.restock.unit,
-        Unit_Price: p.restock.unit_price,
-        Sub_Total: p.restock.unit_price * p.restock.unit_quantity,
-        Quantity: p.restock.unit_quantity,
-      },
+    const dtos = {
+      LineItem: [{}],
       Batch: {
-        Batch_Number: 2,
+        Batch_Number: 0,
         Supplier_ID: supplierId,
       },
       Restock_Clerk: userId,
-      Notes: "sample note",
+      Notes: "Sample Restock Note",
+    };
+
+    dtos.LineItem = payload.map((p) => ({
+      item: {
+        brand: p.restock.items.brand,
+        product: p.restock.items.product,
+        variant: p.restock.items.variant,
+      },
+      total: p.restock.total ?? p.restock.unit_price * p.restock.unit_quantity,
+      unit: p.restock.unit,
+      unit_price: p.restock.unit_price,
+      unit_quantity: p.restock.unit_quantity,
     }));
+    // const dtos = payload.map((p) => ({
+    //   LineItem: [
+    //     {
+    //       item: {
+    //         brand: p.restock.items.brand,
+    //         product: p.restock.items.product,
+    //         variant: p.restock.items.variant,
+    //       },
+    //       total:
+    //         p.restock.total ?? p.restock.unit_price * p.restock.unit_quantity,
+    //       unit: p.restock.unit,
+    //       unit_price: p.restock.unit_price,
+    //       unit_quantity: p.restock.unit_quantity,
+    //     },
+    //   ],
+    //   Batch: {
+    //     Batch_Number: 0,
+    //     Supplier_ID: supplierId,
+    //   },
+    //   Restock_Clerk: String(userId ?? ""),
+    //   Notes: "sample restock notes",
+    // }));
+
+    console.log("dto: ", dtos);
 
     const res = await axios.post(api + "restock/", dtos, {
       headers: { "Content-Type": "application/json" },

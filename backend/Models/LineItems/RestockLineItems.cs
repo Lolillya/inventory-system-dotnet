@@ -19,7 +19,6 @@ namespace backend.Models.LineItems
         public int Restock_ID { get; set; }
         [ForeignKey(nameof(Product_ID))]
         public Product Product { get; set; } = null!;
-        [ForeignKey(nameof(Restock_ID))]
         public Restock Restock { get; set; } = null!;
 
         public string Unit { get; set; } = null!;

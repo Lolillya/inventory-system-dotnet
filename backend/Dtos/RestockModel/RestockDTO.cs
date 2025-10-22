@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using backend.Dtos.LineItem;
 
@@ -5,8 +6,9 @@ namespace backend.Dtos.RestockModel
 {
     public class RestockDTO
     {
+        // Now accepts an array of line items matching the frontend payload
         [Required]
-        public LineItemDto LineItem { get; set; } = null!;
+        public List<RestockLineItemPayloadDto> LineItem { get; set; } = new List<RestockLineItemPayloadDto>();
 
         [Required]
         public RestockBatchDto Batch { get; set; } = null!;

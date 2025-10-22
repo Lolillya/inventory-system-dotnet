@@ -97,10 +97,9 @@ namespace backend.Data
                     .OnDelete(DeleteBehavior.NoAction);
 
                 entity.HasOne(li => li.Restock)
-                    .WithMany()
+                    .WithMany(li => li.LineItems)
                     .HasForeignKey(li => li.Restock_ID)
                     .OnDelete(DeleteBehavior.NoAction);
-
             });
 
         }

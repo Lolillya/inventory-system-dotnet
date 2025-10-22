@@ -18,6 +18,7 @@ namespace backend.Models.RestockModel
         public PersonalDetails Clerk { get; set; } = null!;
 
         public string Notes { get; set; } = null!;
+        [Column(TypeName = "decimal(18,2)")]
         public decimal LineItems_Total { get; set; }
 
         [InverseProperty("Restock")]
