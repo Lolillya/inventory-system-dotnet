@@ -1,4 +1,3 @@
-using System;
 using System.Text.Json;
 using backend.Data;
 using backend.Models.RestockModel;
@@ -6,7 +5,6 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using backend.Dtos.RestockModel;
 using backend.Models.LineItems;
-using backend.Service;
 
 namespace backend.Controller.RestockControllers
 {
@@ -134,7 +132,7 @@ namespace backend.Controller.RestockControllers
         }
 
 
-        public async Task<int> GetNextBatchNumberAsync(string supplierId)
+        private async Task<int> GetNextBatchNumberAsync(string supplierId)
         {
             if (string.IsNullOrEmpty(supplierId)) return 1;
 

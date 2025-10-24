@@ -4,9 +4,9 @@ using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace backend.Dtos.Invoice
+namespace backend.Dtos.InvoiceDTO
 {
-    public class Invoice
+    public class InvoiceDTO
     {
         public int Invoice_ID { get; set; }
         [Required]
