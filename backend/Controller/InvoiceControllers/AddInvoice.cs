@@ -24,5 +24,17 @@ namespace backend.Controller.InvoiceControllers
 
             return Ok();
         }
+
+        // CREATE INVOICE LOGIC
+        private async Task CreateInvoice(InvoiceDTO payload)
+        {
+
+        }
+
+        // CREATE INVOICE LINE ITEMS LOGIC
+        private async Task CreateInvoiceLineItems(InvoiceDTO payload)
+        {
+
+        }
     }
 }

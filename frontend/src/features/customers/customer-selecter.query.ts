@@ -16,7 +16,11 @@ export const useSelectedCustomerQuery = () => {
 export const useSetCustomerSelected = () => {
   const queryClient = useQueryClient();
 
-  return (customer: UserClientModel) => {
-    queryClient.setQueryData<UserClientModel>(customerSelectedKey, customer);
+  const UPDATE_SELECTED_CUSTOMER = (customer: UserClientModel) => {
+    queryClient.setQueryData(customerSelectedKey, customer);
+  };
+
+  return {
+    UPDATE_SELECTED_CUSTOMER,
   };
 };
