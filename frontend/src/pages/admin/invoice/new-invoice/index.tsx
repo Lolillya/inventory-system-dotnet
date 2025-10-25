@@ -29,8 +29,8 @@ const NewInvoicePage = () => {
 
   const handleClick = (data: InventoryProductModel) => {
     const invoice: InvoiceProductModel = {
-      item: {
-        invoice: data,
+      invoice: {
+        item: data,
         unit: units.NONE,
         unit_quantity: 0,
         unit_price: 0,
@@ -73,8 +73,8 @@ const NewInvoicePage = () => {
                 <div className="flex gap-2 flex-wrap h-full overflow-y-auto flex-1 pr-2">
                   {selectedInvoices.map((product, index) => (
                     <InvoiceCard
-                      key={`${product.item.invoice.product.product_ID}-${product.item.invoice.variant.variantName}-${index}`}
-                      product={product.item.invoice}
+                      key={`${product.invoice.item.product.product_ID}-${product.invoice.item.variant.variantName}-${index}`}
+                      product={product.invoice.item}
                       onRemove={() => removeProduct(product)}
                     />
                   ))}

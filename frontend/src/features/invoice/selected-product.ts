@@ -1,3 +1,4 @@
+import { units } from "@/models/enum";
 import { InvoiceProductModel } from "@/models/invoice.model";
 import { useQuery, useQueryClient } from "@tanstack/react-query";
 
@@ -23,10 +24,10 @@ export const useSelectedInvoiceProduct = () => {
         // Check if product already exists
         const exists = old.some(
           (p) =>
-            p.item.invoice.product.product_ID ===
-              product.item.invoice.product.product_ID &&
-            p.item.invoice.variant.variantName ===
-              product.item.invoice.variant.variantName
+            p.invoice.item.product.product_ID ===
+              product.invoice.item.product.product_ID &&
+            p.invoice.item.variant.variantName ===
+              product.invoice.item.variant.variantName
         );
         const next = exists ? old : [...old, product];
 
@@ -46,9 +47,9 @@ export const useSelectedInvoiceProduct = () => {
       (old = []) => {
         const idx = old.findIndex(
           (p) =>
-            String(p.item.invoice.product.product_ID) === String(productId) &&
+            String(p.invoice.item.product.product_ID) === String(productId) &&
             (variantName
-              ? p.item.invoice.variant.variantName === variantName
+              ? p.invoice.item.variant.variantName === variantName
               : true)
         );
         if (idx === -1) return old;
@@ -56,8 +57,8 @@ export const useSelectedInvoiceProduct = () => {
         const target = old[idx];
         const updatedItem: InvoiceProductModel = {
           ...target,
-          item: {
-            ...target.item,
+          invoice: {
+            ...target.invoice,
             unit_quantity,
           },
         };
@@ -69,7 +70,7 @@ export const useSelectedInvoiceProduct = () => {
   };
 
   // Update unit price by product id and optional variant name
-  const updateInvoiceUnitPriceByKey = (
+  const UPDATE_INVOICE_UNIT_PRICE = (
     productId: string | number,
     unit_price: number,
     variantName?: string
@@ -79,9 +80,9 @@ export const useSelectedInvoiceProduct = () => {
       (old = []) => {
         const idx = old.findIndex(
           (p) =>
-            String(p.item.invoice.product.product_ID) === String(productId) &&
+            String(p.invoice.item.product.product_ID) === String(productId) &&
             (variantName
-              ? p.item.invoice.variant.variantName === variantName
+              ? p.invoice.item.variant.variantName === variantName
               : true)
         );
         if (idx === -1) return old;
@@ -89,9 +90,41 @@ export const useSelectedInvoiceProduct = () => {
         const target = old[idx];
         const updatedItem: InvoiceProductModel = {
           ...target,
-          item: {
-            ...target.item,
+          invoice: {
+            ...target.invoice,
             unit_price,
+          },
+        };
+        const newArr = [...old];
+        newArr[idx] = updatedItem;
+        return newArr;
+      }
+    );
+  };
+
+  const UPDATE_INVOICE_UNIT = (
+    productId: string | number,
+    unit: units,
+    variantName: string
+  ) => {
+    queryClient.setQueryData<InvoiceProductModel[]>(
+      InvoiceProductKey,
+      (old = []) => {
+        const idx = old.findIndex(
+          (p) =>
+            String(p.invoice.item.product.product_ID) === String(productId) &&
+            (variantName
+              ? p.invoice.item.variant.variantName === variantName
+              : true)
+        );
+        if (idx === -1) return old;
+
+        const target = old[idx];
+        const updatedItem: InvoiceProductModel = {
+          ...target,
+          invoice: {
+            ...target.invoice,
+            unit,
           },
         };
         const newArr = [...old];
@@ -112,9 +145,9 @@ export const useSelectedInvoiceProduct = () => {
       (old = []) => {
         const idx = old.findIndex(
           (p) =>
-            String(p.item.invoice.product.product_ID) === String(productId) &&
+            String(p.invoice.item.product.product_ID) === String(productId) &&
             (variantName
-              ? p.item.invoice.variant.variantName === variantName
+              ? p.invoice.item.variant.variantName === variantName
               : true)
         );
         if (idx === -1) return old;
@@ -122,8 +155,8 @@ export const useSelectedInvoiceProduct = () => {
         const target = old[idx];
         const updatedItem: InvoiceProductModel = {
           ...target,
-          item: {
-            ...target.item,
+          invoice: {
+            ...target.invoice,
             discount,
           },
         };
@@ -141,10 +174,10 @@ export const useSelectedInvoiceProduct = () => {
         const next = old.filter(
           (p) =>
             !(
-              p.item.invoice.product.product_ID ===
-                product.item.invoice.product.product_ID &&
-              p.item.invoice.variant.variantName ===
-                product.item.invoice.variant.variantName
+              p.invoice.item.product.product_ID ===
+                product.invoice.item.product.product_ID &&
+              p.invoice.item.variant.variantName ===
+                product.invoice.item.variant.variantName
             )
         );
         return next;
@@ -160,7 +193,8 @@ export const useSelectedInvoiceProduct = () => {
     addProduct,
     removeProduct,
     updateInvoiceQuantityByKey,
-    updateInvoiceUnitPriceByKey,
+    UPDATE_INVOICE_UNIT_PRICE,
+    UPDATE_INVOICE_UNIT,
     updateInvoiceDiscountByKey,
     clearList,
   };

@@ -4,6 +4,7 @@ import {
   useSelectedProductInvoiceQuery,
 } from "@/features/invoice/selected-product";
 import { ChevronDownIcon, PlusIcon, XIcon } from "@/icons";
+import { units } from "@/models/enum";
 import { InventoryProductModel } from "@/models/inventory.model";
 import { useState } from "react";
 
@@ -21,17 +22,19 @@ enum DiscountEnum {
 export const InvoiceCard = ({ product, onRemove }: InvoiceCardProp) => {
   const {
     updateInvoiceQuantityByKey,
-    updateInvoiceUnitPriceByKey,
+    UPDATE_INVOICE_UNIT_PRICE,
+    UPDATE_INVOICE_UNIT,
     updateInvoiceDiscountByKey,
   } = useSelectedInvoiceProduct();
   const { data: selelctedInvoice } = useSelectedProductInvoiceQuery();
 
   const [discount, setDiscount] = useState<DiscountEnum>(DiscountEnum.MANUAL);
+  const [selectedUnit, setSelectedUnit] = useState<string>("");
 
   const calculateTotal = () => {
     const item =
       selelctedInvoice && selelctedInvoice.length > 0
-        ? selelctedInvoice[0].item
+        ? selelctedInvoice[0].invoice
         : null;
     if (!item) return "";
 
@@ -43,6 +46,16 @@ export const InvoiceCard = ({ product, onRemove }: InvoiceCardProp) => {
       return subtotal - (subtotal * item.discount) / 100;
 
     return subtotal;
+  };
+
+  const handleChangeUnit = (unit: string) => {
+    UPDATE_INVOICE_UNIT(
+      product.product.product_ID,
+      unit as units,
+      product.variant.variantName
+    );
+
+    setSelectedUnit(unit);
   };
 
   // console.log(selelctedInvoice);
@@ -74,13 +87,12 @@ export const InvoiceCard = ({ product, onRemove }: InvoiceCardProp) => {
       <Separator orientation="horizontal" />
 
       <div className="flex flex-col gap-3">
-        <div className="flex items-center justify-between">
-          <span>quantity</span>
+        <div className="flex items-center justify-end">
           <ChevronDownIcon />
         </div>
 
         <div className="flex flex-col">
-          <span>batch #</span>
+          <span>quantity</span>
           <div className="flex flex-col gap-2">
             <div className="flex">
               <input
@@ -93,7 +105,11 @@ export const InvoiceCard = ({ product, onRemove }: InvoiceCardProp) => {
                   )
                 }
               />
-              <select className="drop-shadow-none rounded-l-none border-l-gray border-l bg-custom-gray w-full rounded-r-lg pl-6">
+              <select
+                className="drop-shadow-none rounded-l-none border-l-gray border-l bg-custom-gray w-full rounded-r-lg pl-6"
+                value={selectedUnit}
+                onChange={(e) => handleChangeUnit(e.target.value)}
+              >
                 <option value={"Boxes"}>Boxes</option>
                 <option value={"Pieces"}>Pieces</option>
               </select>
@@ -132,7 +148,7 @@ export const InvoiceCard = ({ product, onRemove }: InvoiceCardProp) => {
               <input
                 className="drop-shadow-none rounded-r-none bg-custom-gray w-full"
                 onChange={(e) =>
-                  updateInvoiceUnitPriceByKey(
+                  UPDATE_INVOICE_UNIT_PRICE(
                     product.product.product_ID,
                     Number(e.target.value),
                     product.variant.variantName

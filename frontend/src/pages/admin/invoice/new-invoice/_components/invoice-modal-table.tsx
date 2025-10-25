@@ -23,13 +23,19 @@ export const InvoiceTable = () => {
             key={i}
           >
             <span className="text-left w-full">
-              {item.item.invoice.product.productName}
+              {item.invoice.item.product.productName}
             </span>
-            <span className="text-left w-full">99</span>
-            <span className="text-left w-full">Boxed</span>
-            <span className="text-right w-full">P 0000.00</span>
-            <span className="text-right w-full">0%</span>
-            <span className="text-right w-full">P 0000.00</span>
+            <span className="text-left w-full">
+              {item.invoice.item.product.productName}
+            </span>
+            <span className="text-left w-full">{item.invoice.unit}</span>
+            <span className="text-right w-full">
+              P {item.invoice.unit_price}
+            </span>
+            <span className="text-right w-full">{item.invoice.discount}</span>
+            <span className="text-right w-full">
+              P {item.invoice.unit_price * item.invoice.unit_quantity}
+            </span>
           </div>
         ))}
       </div>
