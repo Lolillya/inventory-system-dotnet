@@ -46,9 +46,6 @@ const NewInvoicePage = () => {
     setIsModalOpen((prev) => !prev);
   };
 
-  // `updateInvoice` comes from the global hook and is used by the modal/table to update items
-
-  console.log(selectedInvoices);
   return (
     <section>
       {isModalOpen && <CreateInvoiceModal createInvoice={createInvoice} />}

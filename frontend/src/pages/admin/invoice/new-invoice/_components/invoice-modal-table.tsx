@@ -1,8 +1,16 @@
-import { Separator } from "@/components/separator";
+import { useAuth } from "@/context/use-auth";
+import { createInvoice } from "@/features/invoice/create-invoice.service";
+import { useSelectedInvoiceCustomer } from "@/features/invoice/invoice-customer.state";
 import { useSelectedProductInvoiceQuery } from "@/features/invoice/selected-product";
 
 export const InvoiceTable = () => {
   const { data: selectedInvoices = [] } = useSelectedProductInvoiceQuery();
+  const { data: selecterCustomer } = useSelectedInvoiceCustomer();
+  const { user } = useAuth();
+
+  const handleCreateInvoice = () => {
+    createInvoice(selectedInvoices, selecterCustomer?.id, user?.user_ID);
+  };
   return (
     <div className="flex-1 flex flex-col overflow-hidden gap-2">
       {/* TABLE DATA HEADERS */}
@@ -58,7 +66,7 @@ export const InvoiceTable = () => {
           </div>
         </div>
 
-        <button>Save</button>
+        <button onClick={handleCreateInvoice}>Save</button>
       </div>
     </div>
   );

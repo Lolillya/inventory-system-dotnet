@@ -1,8 +1,10 @@
 import { useCustomersQuery } from "@/features/customers/customer-get-all.query";
 import {
-  useSelectedCustomerQuery,
-  useSetCustomerSelected,
-} from "@/features/customers/customer-selecter.query";
+  updateSelectedCustomer,
+  useSelectedInvoiceCustomer,
+} from "@/features/invoice/invoice-customer.state";
+import { setInvoiceTermQuery } from "@/features/invoice/invoice-term.state";
+
 import { useState, useRef, useEffect } from "react";
 
 type CustomerPickerProps = {
@@ -19,11 +21,13 @@ export const CustomerPicker = ({
 
   const ref = useRef<HTMLDivElement | null>(null);
 
-  // if customersData not provided, fall back to query hook
   const { data: fetchedCustomers } = useCustomersQuery();
-  const { UPDATE_SELECTED_CUSTOMER } = useSetCustomerSelected();
-  const { data: selectedCustomer } = useSelectedCustomerQuery();
+  const { data: selectedCustomer } = useSelectedInvoiceCustomer();
+  const { UPDATE_SELECTED_CUSTOMER } = updateSelectedCustomer();
+  const { UPDATE_INVOICE_TERM } = setInvoiceTermQuery();
   const list = customersData ?? fetchedCustomers ?? [];
+
+  console.log(selectedCustomer);
 
   useEffect(() => {
     const onClick = (e: MouseEvent) => {
@@ -43,7 +47,7 @@ export const CustomerPicker = ({
       <label className="text-vesper-gray">Customer</label>
       <div className="flex w-full">
         <input
-          className="w-full"
+          className="w-full rounded-r-none"
           placeholder={placeholder ?? "Customer Name"}
           value={selectedCustomer?.companyName ?? ""}
           onFocus={() => setOpen(true)}
@@ -51,6 +55,12 @@ export const CustomerPicker = ({
             setQuery(e.target.value);
             setOpen(true);
           }}
+        />
+        <input
+          placeholder="Term by days"
+          type="number"
+          className="rounded-l-none"
+          onChange={(e) => UPDATE_INVOICE_TERM(Number(e.target.value))}
         />
       </div>
 

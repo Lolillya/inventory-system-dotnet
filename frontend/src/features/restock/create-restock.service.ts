@@ -36,28 +36,6 @@ export const createRestock = async (
       unit_price: p.restock.unit_price,
       unit_quantity: p.restock.unit_quantity,
     }));
-    // const dtos = payload.map((p) => ({
-    //   LineItem: [
-    //     {
-    //       item: {
-    //         brand: p.restock.items.brand,
-    //         product: p.restock.items.product,
-    //         variant: p.restock.items.variant,
-    //       },
-    //       total:
-    //         p.restock.total ?? p.restock.unit_price * p.restock.unit_quantity,
-    //       unit: p.restock.unit,
-    //       unit_price: p.restock.unit_price,
-    //       unit_quantity: p.restock.unit_quantity,
-    //     },
-    //   ],
-    //   Batch: {
-    //     Batch_Number: 0,
-    //     Supplier_ID: supplierId,
-    //   },
-    //   Restock_Clerk: String(userId ?? ""),
-    //   Notes: "sample restock notes",
-    // }));
 
     console.log("dto: ", dtos);
 
