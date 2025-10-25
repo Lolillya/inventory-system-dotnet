@@ -8,26 +8,15 @@ namespace backend.Dtos.InvoiceDTO
 {
     public class InvoiceDTO
     {
-        public int Invoice_ID { get; set; }
         [Required]
-        public int Invoice_Number { get; set; }
-        public string? Notes { get; set; }
+        public List<InvoiceLineItemPayloadDto> LineItem { get; set; } = new List<InvoiceLineItemPayloadDto>();
         [Required]
-        public int Customer_ID { get; set; }
+        public string Invoice_Clerk { get; set; } = "";
         [Required]
-        public int Invoice_Clerk { get; set; }
+        public string Customer_ID { get; set; } = "";
         [Required]
-        public string Created_At { get; set; }
-        [Required]
-        public string Updated_At { get; set; }
-        [Required]
-        public float Total_Amount { get; set; }
-        [Required]
-        public float Discount { get; set; }
-        [Required]
-        public string Status { get; set; }
-        [Required]
-        public string Term { get; set; }
+        public string Notes { get; set; } = "";
+
 
 
     }
